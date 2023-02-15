@@ -11,3 +11,5 @@ app.get('/', (req: Request, res: Response): void => {
 app.listen(config.PORT, (): void => {
   logger('Server Running!');
 });
+
+export default app;
