@@ -1,5 +1,5 @@
 # Budient
-
+[![Version](https://badge.fury.io/gh/tterb%2FHyde.svg)](https://badge.fury.io/gh/tterb%2FHyde) 
 Budient's API allows managing expenses and revenues for a given user. It uses a RESTful architecture and is secured with JSON Web Token (JWT) for authentication.
 
 ## Table of Contents
