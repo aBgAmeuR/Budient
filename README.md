@@ -39,11 +39,10 @@ Budient's API allows managing expenses and revenues for a given user. It uses a 
 
 ### Transactions
 
-- POST `/api/transactions`: add a new transaction for a user
+- POST `/api/transactions/:id`: add a new transaction for a user
 - GET `/api/transactions/:id`: get information for a transaction based on its identifier
 - PUT `/api/transactions/:id`: update transaction information based on its identifier
 - DELETE `/api/transactions/:id`: delete a transaction based on its identifier
-- GET `/api/transactions?from=:date&to=:date`: get all transactions for a user between two given dates
 
 ### Connection history
 

@@ -1,4 +1,4 @@
-import { Document, Schema } from '../DataBase/Database';
+import mongoose, { Document, Schema } from '../DataBase/Database';
 
 export interface IConnectionHistory extends Document {
   date: Date;
@@ -17,4 +17,4 @@ const ConnectionHistorySchema: Schema = new Schema({
   },
 });
 
-export default ConnectionHistorySchema;
+export default mongoose.model<IConnectionHistory>('ConnectionHistory', ConnectionHistorySchema);

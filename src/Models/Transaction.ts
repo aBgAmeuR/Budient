@@ -1,4 +1,4 @@
-import { Document, Schema } from '../DataBase/Database';
+import mongoose, { Document, Schema } from '../DataBase/Database';
 
 export interface ITransaction extends Document {
   date: Date;
@@ -31,4 +31,5 @@ const TransactionSchema: Schema = new Schema({
   },
 });
 
-export default TransactionSchema;
+
+export default mongoose.model<ITransaction>('Transaction', TransactionSchema);
