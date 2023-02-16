@@ -2,7 +2,7 @@
 
 Budient's API allows managing expenses and revenues for a given user. It uses a RESTful architecture and is secured with JSON Web Token (JWT) for authentication.
 
-## Table of Conten
+## Table of Contents
 
 - [Features](#features)
 - [Routes](#routes)
@@ -58,7 +58,7 @@ Budient's API allows managing expenses and revenues for a given user. It uses a 
 
 ## Dependencies
 
-```json
+```
 // package.json
 "dependencies": {
     "bcrypt": "^5.1.0",
