@@ -29,7 +29,7 @@ export async function CreateUser(req: Request, res: Response, next: NextFunction
     // Send the response.
     res.status(200).json({
       message: 'User created successfully.',
-      user,
+      userId: user._id,
     });
   } catch (err) {
     next(err);
@@ -38,7 +38,7 @@ export async function CreateUser(req: Request, res: Response, next: NextFunction
 
 export async function GetUserById(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const { id } = req.params;
+    const { id } = req.body;
 
     // Check if the id is present.
     if (!id) {
@@ -56,7 +56,16 @@ export async function GetUserById(req: Request, res: Response, next: NextFunctio
     // Send the response.
     res.status(200).json({
       message: 'User found successfully.',
-      user,
+      user: {
+        name: user.name,
+        surname: user.surname,
+        dateOfBirth: user.dateOfBirth,
+        email: user.email,
+        preset: user.preset,
+        connectionHistory: user.connectionHistory,
+        transactions: user.transactions,
+        __v: user.__v,
+      },
     });
   } catch (err) {
     next(err);
