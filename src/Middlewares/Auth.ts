@@ -27,20 +27,9 @@ export async function Auth(req: Request, res: Response, next: NextFunction): Pro
     }
 
     // Send the response.
-    res.status(200).json({
-      message: 'User authenticated successfully.',
-      user: {
-        _id: user._id,
-        name: user.name,
-        surname: user.surname,
-        dateOfBirth: user.dateOfBirth,
-        email: user.email,
-        preset: user.preset,
-        connectionHistory: user.connectionHistory,
-        transactions: user.transactions,
-        __v: user.__v,
-      },
-    });
+    res.locals.userId = user._id;
+
+    next();
   } catch (err) {
     next(err);
   }

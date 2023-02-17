@@ -4,7 +4,7 @@ import TransactionSchema from '../Models/Transaction';
 
 export async function CreateTransaction(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const { userId } = req.params;
+    const userId = res.locals.userId;
     const { date, amount, type, category, description } = req.body;
 
     // Check if the id is present.
@@ -31,8 +31,7 @@ export async function CreateTransaction(req: Request, res: Response, next: NextF
 
     // Check if the user exists.
     if (!user) {
-      console.error('User not found');
-      return;
+      throw new Error('User not found.');
     }
 
     // Add the transaction to the user's transactions array.
@@ -53,7 +52,7 @@ export async function CreateTransaction(req: Request, res: Response, next: NextF
 
 export async function GetTransactions(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const { userId } = req.params;
+    const userId = res.locals.userId;
 
     // Check if the id is present.
     if (!userId) {
@@ -68,11 +67,11 @@ export async function GetTransactions(req: Request, res: Response, next: NextFun
       throw new Error('User not found.');
     }
 
+    // Access the transactions property on the user object.
+    const transactions = user.transactions;
+
     // Send the response.
-    res.status(200).json({
-      message: 'Transactions found successfully.',
-      transactions: user.transactions,
-    });
+    res.status(200).json(transactions);
   } catch (err) {
     next(err);
   }
@@ -80,7 +79,8 @@ export async function GetTransactions(req: Request, res: Response, next: NextFun
 
 export async function UpdateTransaction(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const { userId, transactionId } = req.params;
+    const userId = res.locals.userId;
+    const { transactionId } = req.params;
     const update = req.body;
 
     // Check if the id is present.
@@ -122,7 +122,8 @@ export async function UpdateTransaction(req: Request, res: Response, next: NextF
 
 export async function DeleteTransaction(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const { userId, transactionId } = req.params;
+    const userId = res.locals.userId;
+    const { transactionId } = req.params;
 
     // Check if the id is present.
     if (!userId || !transactionId) {
