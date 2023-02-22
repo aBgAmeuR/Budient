@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import User from '../Models/User';
-import TransactionSchema from '../Models/Transaction';
+import { Transaction } from '../Models/Transaction';
+import { Types } from 'mongoose';
 
 export async function CreateTransaction(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
@@ -18,7 +19,7 @@ export async function CreateTransaction(req: Request, res: Response, next: NextF
     }
 
     // Create the transaction.
-    const newTransaction = new TransactionSchema({
+    const newTransaction = new Transaction({
       date,
       amount,
       type,
@@ -35,7 +36,7 @@ export async function CreateTransaction(req: Request, res: Response, next: NextF
     }
 
     // Add the transaction to the user's transactions array.
-    user.transactions.push(newTransaction);
+    user.transactions.push(newTransaction._id);
 
     // Save the user.
     await user.save();
@@ -89,15 +90,15 @@ export async function UpdateTransaction(req: Request, res: Response, next: NextF
     }
 
     // Find the user.
-    const user = await User.findById(userId);
-
+    const user = await User.findById(new Types.ObjectId(userId));
     // Check if the user exists.
     if (!user) {
       throw new Error('User not found.');
     }
+    console.log(user.transactions);
 
     // Find the transaction.
-    const transaction = user.transactions.find((transaction) => transaction._id == transactionId);
+    const transaction = await Transaction.findById(new Types.ObjectId(transactionId));
 
     // Check if the transaction exists.
     if (!transaction) {
@@ -105,7 +106,7 @@ export async function UpdateTransaction(req: Request, res: Response, next: NextF
     }
 
     // Update the transaction.
-    transaction.update(update);
+    transaction.set(update);
 
     // Save the user.
     await user.save();
@@ -131,7 +132,7 @@ export async function DeleteTransaction(req: Request, res: Response, next: NextF
     }
 
     // Find the user.
-    const user = await User.findById(userId);
+    const user = await User.findById(new Types.ObjectId(userId));
 
     // Check if the user exists.
     if (!user) {
@@ -139,7 +140,7 @@ export async function DeleteTransaction(req: Request, res: Response, next: NextF
     }
 
     // Find the transaction.
-    const transaction = user.transactions.find((transaction) => transaction._id == transactionId);
+    const transaction = await Transaction.findById(new Types.ObjectId(transactionId));
 
     // Check if the transaction exists.
     if (!transaction) {

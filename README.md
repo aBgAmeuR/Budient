@@ -39,10 +39,10 @@ Budient's API allows managing expenses and revenues for a given user. It uses a 
 
 ### Transactions
 
-- POST `/api/transactions/:id`: add a new transaction for a user
-- GET `/api/transactions/:id`: get information for a transaction based on its identifier
-- PUT `/api/transactions/:id`: update transaction information based on its identifier
-- DELETE `/api/transactions/:id`: delete a transaction based on its identifier
+- POST `/api/transactions/`: add a new transaction for a user
+- GET `/api/transactions/`: get information for a transaction based on its identifier
+- PUT `/api/transactions/`: update transaction information based on its identifier
+- DELETE `/api/transactions/`: delete a transaction based on its identifier
 
 ### Connection history
 
@@ -65,6 +65,7 @@ Budient's API allows managing expenses and revenues for a given user. It uses a 
     "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.9.1"
 }
 ```

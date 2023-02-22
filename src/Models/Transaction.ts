@@ -32,4 +32,4 @@ const TransactionSchema: Schema = new Schema({
 });
 
 
-export default mongoose.model<ITransaction>('Transaction', TransactionSchema);
+export const Transaction = mongoose.model<ITransaction>('Transaction', TransactionSchema);

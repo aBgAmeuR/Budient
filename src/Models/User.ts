@@ -1,6 +1,4 @@
 import mongoose, { Document, Schema } from '../DataBase/Database';
-import ConnectionHistorySchema, { IConnectionHistory } from './ConnectionHistory';
-import TransactionSchema, { ITransaction } from './Transaction';
 
 export interface IUser extends Document {
   name: string;
@@ -9,8 +7,8 @@ export interface IUser extends Document {
   email: string;
   password: string;
   preset: number;
-  connectionHistory: [IConnectionHistory];
-  transactions: [ITransaction];
+  connectionHistory: Array<mongoose.Schema.Types.ObjectId>;
+  transactions: Array<mongoose.Schema.Types.ObjectId>;
 }
 
 const UserSchema: Schema = new Schema({
@@ -34,14 +32,15 @@ const UserSchema: Schema = new Schema({
   password: {
     type: String,
     require: [true, 'Please enter a password.'],
+    minlength: [6, 'Your password must be at least 6 characters long.'],
   },
   preset: {
     type: Number,
     require: false,
     default: 1,
   },
-  connectionHistory: [{ type: [ConnectionHistorySchema], required: false }],
-  transactions: [{ type: [TransactionSchema], required: false }],
+  connectionHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ConnectionHistory' }],
+  transactions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Transaction' }],
 });
 
 export default mongoose.model<IUser>('User', UserSchema);

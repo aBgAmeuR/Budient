@@ -10,6 +10,8 @@ export async function CreateUser(req: Request, res: Response, next: NextFunction
     if (!name || !surname || !dateOfBirth || !email || !req.body.password) {
       throw new Error('Missing parameters.');
     }
+    // const connectionHistory = {};
+    // const transactions = {};
 
     const password = await Bcrypt.hash(req.body.password, 10);
 
@@ -21,6 +23,8 @@ export async function CreateUser(req: Request, res: Response, next: NextFunction
       email,
       password,
       ...(preset && { preset }),
+      // ...(connectionHistory && { connectionHistory }),
+      // ...(transactions && { transactions }),
     });
 
     // Save the user.
