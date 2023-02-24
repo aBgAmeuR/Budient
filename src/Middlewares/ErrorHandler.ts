@@ -1,14 +1,18 @@
 import { ErrorRequestHandler } from 'express';
 
-export const ErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
-  // Do some error handling, logging, etc. Here
-
-
-  // Set the response status code based on the error
-  res.status(500);
-
-  // Send the error message as response
-  res.json({
-    error: err.message,
-  });
+export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+  if (err.message === 'Missing email or password.') {
+    res.status(400).json({ error: 'Missing email or password.' });
+  } else if (err.message === 'User not found.') {
+    res.status(404).json({ error: 'User not found.' });
+  } else if (err.message === 'Invalid password.') {
+    res.status(400).json({ error: 'Invalid password.' });
+  } else if (err.message === 'Missing parameters.') {
+    res.status(400).json({ error: 'Missing parameters.' });
+  } else if (err.message === 'Missing id.') {
+    res.status(400).json({ error: 'Missing id.' });
+  } else {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
 };
