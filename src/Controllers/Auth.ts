@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import User from '../Models/User';
 import jwt from 'jsonwebtoken';
+import Hash from '../Helpers/Hash';
 import { config } from '../Config/Config';
 
 export async function Authenticate(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -21,7 +22,10 @@ export async function Authenticate(req: Request, res: Response, next: NextFuncti
     }
 
     // Check if the password is correct.
-    if (password !== user.password) {
+    const passwordHash = Hash(password);
+    console.log(passwordHash, user.password);
+
+    if (passwordHash !== user.password) {
       throw new Error('Invalid password.');
     }
 
@@ -29,7 +33,7 @@ export async function Authenticate(req: Request, res: Response, next: NextFuncti
     const token = jwt.sign({ _id: user._id }, config.JWT_SECRET, {
       expiresIn: '1h',
     });
-    
+
     // Send the response.
     res.status(200).json({
       message: 'User authenticated successfully.',
