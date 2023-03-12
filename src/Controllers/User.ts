@@ -33,7 +33,9 @@ export async function CreateUser(req: Request, res: Response, next: NextFunction
     // Send the response.
     res.status(200).json({
       message: 'User created successfully.',
-      userId: user._id,
+      data: {
+        userId: user._id,
+      },
     });
   } catch (err) {
     next(err);
@@ -60,15 +62,17 @@ export async function GetUser(req: Request, res: Response, next: NextFunction): 
     // Send the response.
     res.status(200).json({
       message: 'User found successfully.',
-      user: {
-        name: user.name,
-        surname: user.surname,
-        dateOfBirth: user.dateOfBirth,
-        email: user.email,
-        preset: user.preset,
-        connectionHistory: user.connectionHistory,
-        transactions: user.transactions,
-        __v: user.__v,
+      data: {
+        user: {
+          name: user.name,
+          surname: user.surname,
+          dateOfBirth: user.dateOfBirth,
+          email: user.email,
+          preset: user.preset,
+          connectionHistory: user.connectionHistory,
+          transactions: user.transactions,
+          __v: user.__v,
+        },
       },
     });
   } catch (err) {
@@ -87,7 +91,7 @@ export async function UpdateUser(req: Request, res: Response, next: NextFunction
     }
 
     // Find the user and update it.
-    const user = User.findByIdAndUpdate(id, update, { new: true });
+    const user = await User.findByIdAndUpdate(id, update);
 
     // Check if the user exists.
     if (!user) {
@@ -113,7 +117,7 @@ export async function DeleteUser(req: Request, res: Response, next: NextFunction
     }
 
     // Find the user and delete it.
-    const user = User.findByIdAndDelete(id);
+    const user = await User.findByIdAndDelete(id);
 
     // Check if the user exists.
     if (!user) {
