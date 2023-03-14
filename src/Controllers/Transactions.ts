@@ -6,15 +6,18 @@ import { Types } from 'mongoose';
 export async function CreateTransaction(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const userId = res.locals.userId;
-    const { date, amount, type, category, description } = req.body;
+    const { amount, type, category, description } = req.body;
 
     // Check if the id is present.
     if (!userId) {
       throw new Error('Missing id.');
     }
 
+    // Parse the date.
+    const date = new Date(req.body.date);
+
     // Check if all parameters are present.
-    if (!amount || !description || !date || !type) {
+    if (!amount || !date || !type) {
       throw new Error('Missing parameters.');
     }
 
@@ -24,7 +27,7 @@ export async function CreateTransaction(req: Request, res: Response, next: NextF
       amount,
       type,
       category,
-      description,
+      ...(description && { description }),
     });
 
     // Find the user.
@@ -41,6 +44,9 @@ export async function CreateTransaction(req: Request, res: Response, next: NextF
     // Save the user.
     await user.save();
 
+    // Save the transaction.
+    await newTransaction.save();
+
     // Send the response.
     res.status(200).json({
       message: 'Transaction created successfully.',
@@ -54,7 +60,7 @@ export async function CreateTransaction(req: Request, res: Response, next: NextF
 export async function GetTransactions(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const userId = res.locals.userId;
-
+    
     // Check if the id is present.
     if (!userId) {
       throw new Error('Missing id.');
@@ -68,8 +74,8 @@ export async function GetTransactions(req: Request, res: Response, next: NextFun
       throw new Error('User not found.');
     }
 
-    // Access the transactions property on the user object.
-    const transactions = user.transactions;
+    // get all transactions
+    const transactions = await Transaction.find({ _id: { $in: user.transactions } });
 
     // Send the response.
     res.status(200).json(transactions);

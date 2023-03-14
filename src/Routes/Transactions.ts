@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import { CreateTransaction, GetTransactions, UpdateTransaction, DeleteTransaction } from '../Controllers/Transactions';
-import { Auth } from '../Controllers/Auth';
+import { Auth } from '../Middlewares/AuthMiddleware';
 
 router.post('/',[Auth] , CreateTransaction);
 router.get('/',[Auth] , GetTransactions);

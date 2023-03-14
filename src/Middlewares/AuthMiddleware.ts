@@ -1,13 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import User from '../Models/User';
 import { config } from '../Config/Config';
 
 // auth with jwt
 export async function Auth(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const token = req.headers.authorization?.split(' ')[1];
-
+    const token = req.get('token');
+    
     // Check if the token is present.
     if (!token) {
       throw new Error('Missing token.');
