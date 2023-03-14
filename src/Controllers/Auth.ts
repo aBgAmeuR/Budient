@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import Hash from '../Helpers/Hash';
 import { config } from '../Config/Config';
 
-export async function Authenticate(req: Request, res: Response, next: NextFunction): Promise<void> {
+export async function Auth(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const { email, password } = req.body;
 
@@ -22,6 +22,7 @@ export async function Authenticate(req: Request, res: Response, next: NextFuncti
     }
 
     // Check if the password is correct.
+    
     const passwordHash = Hash(password);
     console.log(passwordHash, user.password);
 
