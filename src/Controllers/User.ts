@@ -80,8 +80,6 @@ export async function GetUser(req: Request, res: Response, next: NextFunction): 
           dateOfBirth: user.dateOfBirth,
           email: user.email,
           preset: user.preset,
-          connectionHistory: user.connectionHistory,
-          transactions: user.transactions,
           __v: user.__v,
         },
       },
