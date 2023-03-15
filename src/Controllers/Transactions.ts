@@ -49,7 +49,7 @@ export async function CreateTransaction(req: Request, res: Response, next: NextF
     await newTransaction.save();
 
     // Send the response.
-    res.status(200).json({
+    res.status(201).json({
       message: 'Transaction created successfully.',
       error: false,
       data: {
@@ -161,7 +161,7 @@ export async function UpdateTransaction(req: Request, res: Response, next: NextF
     }    
     // Find the transaction.
     const transaction = await Transaction.findById(transactionId);
-    
+
     // Check if the transaction exists.
     if (!transaction) {
       throw new BaseError('Transaction not found.', 404);

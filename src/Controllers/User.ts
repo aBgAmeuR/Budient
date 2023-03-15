@@ -29,7 +29,7 @@ export async function CreateUser(req: Request, res: Response, next: NextFunction
     await user.save();
 
     // Send the response.
-    res.status(200).json({
+    res.status(201).json({
       message: 'User created successfully.',
       error: false,
       data: {
