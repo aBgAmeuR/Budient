@@ -13,8 +13,14 @@ export async function CreateUser(req: Request, res: Response, next: NextFunction
       throw new BaseError('Missing parameters.', 400);
     }
 
-    const password = await Hash(req.body.password);
+    // Check if the user already exists.
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      throw new BaseError('User already exists.', 409);
+    }
 
+    const password = await Hash(req.body.password);
+    
     // Create the user.
     const user = new User({
       name,
