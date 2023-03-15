@@ -30,6 +30,7 @@ export async function CreateUser(req: Request, res: Response, next: NextFunction
     // Send the response.
     res.status(200).json({
       message: 'User created successfully.',
+      error: false,
       data: {
         userId: user._id,
       },
@@ -59,6 +60,7 @@ export async function GetUser(req: Request, res: Response, next: NextFunction): 
     // Send the response.
     res.status(200).json({
       message: 'User found successfully.',
+      error: false,
       data: {
         user: {
           name: user.name,
@@ -98,6 +100,7 @@ export async function UpdateUser(req: Request, res: Response, next: NextFunction
     // Send the response.
     res.status(200).json({
       message: 'User updated successfully.',
+      error: false,
     });
   } catch (err) {
     next(err);
@@ -124,6 +127,7 @@ export async function DeleteUser(req: Request, res: Response, next: NextFunction
     // Send the response.
     res.status(200).json({
       message: 'User deleted successfully.',
+      error: false,
     });
   } catch (err) {
     next(err);

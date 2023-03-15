@@ -52,7 +52,10 @@ export async function CreateTransaction(req: Request, res: Response, next: NextF
     // Send the response.
     res.status(200).json({
       message: 'Transaction created successfully.',
-      transaction: newTransaction,
+      error: false,
+      data: {
+        transaction: newTransaction,
+      },
     });
   } catch (err) {
     next(err);
@@ -62,7 +65,7 @@ export async function CreateTransaction(req: Request, res: Response, next: NextF
 export async function GetTransactions(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const userId = res.locals.userId;
-    
+
     // Check if the id is present.
     if (!userId) {
       throw new BaseError('Missing id.', 400);
@@ -80,7 +83,13 @@ export async function GetTransactions(req: Request, res: Response, next: NextFun
     const transactions = await Transaction.find({ _id: { $in: user.transactions } });
 
     // Send the response.
-    res.status(200).json(transactions);
+    res.status(200).json({
+      message: 'Transactions found successfully.',
+      error: false,
+      data: {
+        transactions,
+      },
+    });
   } catch (err) {
     next(err);
   }
@@ -112,7 +121,13 @@ export async function GetTransaction(req: Request, res: Response, next: NextFunc
     }
 
     // Send the response.
-    res.status(200).json(transaction);
+    res.status(200).json({
+      message: 'Transaction found successfully.',
+      error: false,
+      data: {
+        transaction,
+      },
+    });
   } catch (err) {
     next(err);
   }
@@ -154,7 +169,7 @@ export async function UpdateTransaction(req: Request, res: Response, next: NextF
     // Send the response.
     res.status(200).json({
       message: 'Transaction updated successfully.',
-      transaction,
+      error: false,
     });
   } catch (err) {
     next(err);
@@ -196,7 +211,7 @@ export async function DeleteTransaction(req: Request, res: Response, next: NextF
     // Send the response.
     res.status(200).json({
       message: 'Transaction deleted successfully.',
-      transaction,
+      error: false,
     });
   } catch (err) {
     next(err);

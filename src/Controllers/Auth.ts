@@ -39,7 +39,10 @@ export async function Auth(req: Request, res: Response, next: NextFunction): Pro
     // Send the response.
     res.status(200).json({
       message: 'User authenticated successfully.',
-      token,
+      error: false,
+      data: {
+        token,
+      },
     });
   } catch (err) {
     next(err);
