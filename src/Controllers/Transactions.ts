@@ -161,7 +161,6 @@ export async function UpdateTransaction(req: Request, res: Response, next: NextF
     }    
     // Find the transaction.
     const transaction = await Transaction.findById(transactionId);
-    console.log(transaction);
     
     // Check if the transaction exists.
     if (!transaction) {
