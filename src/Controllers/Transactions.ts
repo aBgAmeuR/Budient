@@ -1,9 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import User from '../Models/User';
 import { Transaction } from '../Models/Transaction';
-import { Types } from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 import BaseError from '../Helpers/BaseError';
-import { basename } from 'path';
 
 export async function CreateTransaction(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
@@ -104,6 +103,10 @@ export async function GetTransaction(req: Request, res: Response, next: NextFunc
       throw new BaseError('Missing id.', 400);
     }
 
+    // Check if the id is valid.
+    if (!mongoose.isValidObjectId(transactionId)) {
+      throw new BaseError('Invalid id.', 400);
+    }
     // Find the user.
     const user = await User.findById(userId);
 
@@ -136,25 +139,30 @@ export async function GetTransaction(req: Request, res: Response, next: NextFunc
 export async function UpdateTransaction(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const userId = res.locals.userId;
-    const { transactionId } = req.params;
-    const update = req.body;
-
+    const { id: transactionId } = req.params;
+    const update = req.body;    
+    
     // Check if the id is present.
     if (!userId || !transactionId) {
       throw new BaseError('Missing id.', 400);
     }
 
+    // Check if the id is valid.
+    if (!mongoose.isValidObjectId(transactionId)) {
+      throw new BaseError('Invalid id.', 400);
+    }
+
     // Find the user.
     const user = await User.findById(new Types.ObjectId(userId));
+
     // Check if the user exists.
     if (!user) {
       throw new BaseError('User not found.', 404);
-    }
-    console.log(user.transactions);
-
+    }    
     // Find the transaction.
-    const transaction = await Transaction.findById(new Types.ObjectId(transactionId));
-
+    const transaction = await Transaction.findById(transactionId);
+    console.log(transaction);
+    
     // Check if the transaction exists.
     if (!transaction) {
       throw new BaseError('Transaction not found.', 404);
@@ -165,6 +173,9 @@ export async function UpdateTransaction(req: Request, res: Response, next: NextF
 
     // Save the user.
     await user.save();
+
+    // Save the transaction.
+    await transaction.save();
 
     // Send the response.
     res.status(200).json({
@@ -179,12 +190,18 @@ export async function UpdateTransaction(req: Request, res: Response, next: NextF
 export async function DeleteTransaction(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const userId = res.locals.userId;
-    const { transactionId } = req.params;
+    const { id: transactionId } = req.params;
 
     // Check if the id is present.
     if (!userId || !transactionId) {
       throw new BaseError('Missing id.', 400);
     }
+
+    // Check if the id is valid.
+    if (!mongoose.isValidObjectId(transactionId)) {
+      throw new BaseError('Invalid id.', 400);
+    }
+
 
     // Find the user.
     const user = await User.findById(new Types.ObjectId(userId));

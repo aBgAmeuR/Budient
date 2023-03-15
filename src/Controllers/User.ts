@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import Hash from '../Helpers/Hash';
 import User from '../Models/User';
 import BaseError from '../Helpers/BaseError';
+import mongoose from 'mongoose';
 
 export async function CreateUser(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
@@ -49,6 +50,11 @@ export async function GetUser(req: Request, res: Response, next: NextFunction): 
       throw new BaseError('Missing id.', 400);
     }
 
+    // Check if the id is valid.
+    if (!mongoose.isValidObjectId(id)) {
+      throw new BaseError('Invalid id.', 400);
+    }
+
     // Find the user.
     const user = await User.findById(id);
 
@@ -89,6 +95,11 @@ export async function UpdateUser(req: Request, res: Response, next: NextFunction
       throw new BaseError('Missing id.', 400);
     }
 
+    // Check if the id is valid.
+    if (!mongoose.isValidObjectId(id)) {
+      throw new BaseError('Invalid id.', 400);
+    }
+
     // Find the user and update it.
     const user = await User.findByIdAndUpdate(id, update);
 
@@ -116,6 +127,11 @@ export async function DeleteUser(req: Request, res: Response, next: NextFunction
       throw new BaseError('Missing id.', 400);
     }
 
+    // Check if the id is valid.
+    if (!mongoose.isValidObjectId(id)) {
+      throw new BaseError('Invalid id.', 400);
+    }
+    
     // Find the user and delete it.
     const user = await User.findByIdAndDelete(id);
 

@@ -25,7 +25,6 @@ export async function Auth(req: Request, res: Response, next: NextFunction): Pro
     // Check if the password is correct.
     
     const passwordHash = Hash(password);
-    console.log(passwordHash, user.password);
 
     if (passwordHash !== user.password) {
       throw new BaseError('Invalid password.', 401);

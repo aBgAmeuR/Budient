@@ -6,7 +6,7 @@ import { Auth } from '../Middlewares/AuthMiddleware';
 router.post('/',[Auth] , CreateTransaction);
 router.get('/',[Auth] , GetTransactions);
 router.get('/:id',[Auth] , GetTransaction);
-router.put('/',[Auth] , UpdateTransaction);
-router.delete('/',[Auth] , DeleteTransaction);
+router.put('/:id',[Auth] , UpdateTransaction);
+router.delete('/:id',[Auth] , DeleteTransaction);
 
 export default router;
