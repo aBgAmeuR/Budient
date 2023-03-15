@@ -9,7 +9,7 @@ export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     });
   } else {
     res.status(500).json({
-      message: 'Something went wrong.',
+      message: 'Internal Server Error.',
     });
   }
 }
