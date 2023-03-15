@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 import User from '../Models/User';
 import { Transaction } from '../Models/Transaction';
 import { Types } from 'mongoose';
+import BaseError from '../Helpers/BaseError';
+import { basename } from 'path';
 
 export async function CreateTransaction(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
@@ -10,7 +12,7 @@ export async function CreateTransaction(req: Request, res: Response, next: NextF
 
     // Check if the id is present.
     if (!userId) {
-      throw new Error('Missing id.');
+      throw new BaseError('Missing id.', 400);
     }
 
     // Parse the date.
@@ -18,7 +20,7 @@ export async function CreateTransaction(req: Request, res: Response, next: NextF
 
     // Check if all parameters are present.
     if (!amount || !date || !type) {
-      throw new Error('Missing parameters.');
+      throw new BaseError('Missing parameters.', 400);
     }
 
     // Create the transaction.
@@ -35,7 +37,7 @@ export async function CreateTransaction(req: Request, res: Response, next: NextF
 
     // Check if the user exists.
     if (!user) {
-      throw new Error('User not found.');
+      throw new BaseError('User not found.', 404);
     }
 
     // Add the transaction to the user's transactions array.
@@ -63,7 +65,7 @@ export async function GetTransactions(req: Request, res: Response, next: NextFun
     
     // Check if the id is present.
     if (!userId) {
-      throw new Error('Missing id.');
+      throw new BaseError('Missing id.', 400);
     }
 
     // Find the user.
@@ -71,7 +73,7 @@ export async function GetTransactions(req: Request, res: Response, next: NextFun
 
     // Check if the user exists.
     if (!user) {
-      throw new Error('User not found.');
+      throw new BaseError('User not found.', 404);
     }
 
     // get all transactions
@@ -79,6 +81,38 @@ export async function GetTransactions(req: Request, res: Response, next: NextFun
 
     // Send the response.
     res.status(200).json(transactions);
+  } catch (err) {
+    next(err);
+  }
+}
+export async function GetTransaction(req: Request, res: Response, next: NextFunction): Promise<void> {
+  try {
+    const userId = res.locals.userId;
+    const { id: transactionId } = req.params;
+
+    // Check if the id is present.
+    if (!userId || !transactionId) {
+      throw new BaseError('Missing id.', 400);
+    }
+
+    // Find the user.
+    const user = await User.findById(userId);
+
+    // Check if the user exists.
+    if (!user) {
+      throw new BaseError('User not found.', 404);
+    }
+
+    // Find the transaction.
+    const transaction = await Transaction.findById(transactionId);
+
+    // Check if the transaction exists.
+    if (!transaction) {
+      throw new BaseError('Transaction not found.', 404);
+    }
+
+    // Send the response.
+    res.status(200).json(transaction);
   } catch (err) {
     next(err);
   }
@@ -92,14 +126,14 @@ export async function UpdateTransaction(req: Request, res: Response, next: NextF
 
     // Check if the id is present.
     if (!userId || !transactionId) {
-      throw new Error('Missing id.');
+      throw new BaseError('Missing id.', 400);
     }
 
     // Find the user.
     const user = await User.findById(new Types.ObjectId(userId));
     // Check if the user exists.
     if (!user) {
-      throw new Error('User not found.');
+      throw new BaseError('User not found.', 404);
     }
     console.log(user.transactions);
 
@@ -108,7 +142,7 @@ export async function UpdateTransaction(req: Request, res: Response, next: NextF
 
     // Check if the transaction exists.
     if (!transaction) {
-      throw new Error('Transaction not found.');
+      throw new BaseError('Transaction not found.', 404);
     }
 
     // Update the transaction.
@@ -134,7 +168,7 @@ export async function DeleteTransaction(req: Request, res: Response, next: NextF
 
     // Check if the id is present.
     if (!userId || !transactionId) {
-      throw new Error('Missing id.');
+      throw new BaseError('Missing id.', 400);
     }
 
     // Find the user.
@@ -142,7 +176,7 @@ export async function DeleteTransaction(req: Request, res: Response, next: NextF
 
     // Check if the user exists.
     if (!user) {
-      throw new Error('User not found.');
+      throw new BaseError('User not found.', 404);
     }
 
     // Find the transaction.
@@ -150,7 +184,7 @@ export async function DeleteTransaction(req: Request, res: Response, next: NextF
 
     // Check if the transaction exists.
     if (!transaction) {
-      throw new Error('Transaction not found.');
+      throw new BaseError('Transaction not found.', 404);
     }
 
     // Delete the transaction.

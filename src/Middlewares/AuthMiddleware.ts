@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { config } from '../Config/Config';
+import BaseError from '../Helpers/BaseError';
 
 // auth with jwt
 export async function Auth(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -9,7 +10,7 @@ export async function Auth(req: Request, res: Response, next: NextFunction): Pro
     
     // Check if the token is present.
     if (!token) {
-      throw new Error('Missing token.');
+      throw new BaseError('Missing token.', 400);
     }
 
     // Verify the token.
@@ -17,12 +18,12 @@ export async function Auth(req: Request, res: Response, next: NextFunction): Pro
     try {
       user = jwt.verify(token, config.JWT_SECRET);
     } catch (err) {
-      throw new Error('Invalid token.');
+      throw new BaseError('Invalid token.', 401);
     }
 
     // Check if the user exists and is a string.
     if (!user || typeof user === 'string') {
-      throw new Error('Invalid token.');
+      throw new BaseError('Invalid token.', 401);
     }
 
     // Send the response.

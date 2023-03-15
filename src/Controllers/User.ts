@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import Hash from '../Helpers/Hash';
 import User from '../Models/User';
+import BaseError from '../Helpers/BaseError';
 
 export async function CreateUser(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
@@ -8,7 +9,7 @@ export async function CreateUser(req: Request, res: Response, next: NextFunction
 
     // Check if all parameters are present.
     if (!name || !surname || !dateOfBirth || !email || !req.body.password) {
-      throw new Error('Missing parameters.');
+      throw new BaseError('Missing parameters.', 400);
     }
 
     const password = await Hash(req.body.password);
@@ -44,7 +45,7 @@ export async function GetUser(req: Request, res: Response, next: NextFunction): 
 
     // Check if the id is present.
     if (!id) {
-      throw new Error('Missing id.');
+      throw new BaseError('Missing id.', 400);
     }
 
     // Find the user.
@@ -52,7 +53,7 @@ export async function GetUser(req: Request, res: Response, next: NextFunction): 
 
     // Check if the user exists.
     if (!user) {
-      throw new Error('User not found.');
+      throw new BaseError('User not found.', 404);
     }
 
     // Send the response.
@@ -83,7 +84,7 @@ export async function UpdateUser(req: Request, res: Response, next: NextFunction
 
     // Check if the id is present.
     if (!id) {
-      throw new Error('Missing id.');
+      throw new BaseError('Missing id.', 400);
     }
 
     // Find the user and update it.
@@ -91,7 +92,7 @@ export async function UpdateUser(req: Request, res: Response, next: NextFunction
 
     // Check if the user exists.
     if (!user) {
-      throw new Error('User not found.');
+      throw new BaseError('User not found.', 404);
     }
 
     // Send the response.
@@ -109,7 +110,7 @@ export async function DeleteUser(req: Request, res: Response, next: NextFunction
 
     // Check if the id is present.
     if (!id) {
-      throw new Error('Missing id.');
+      throw new BaseError('Missing id.', 400);
     }
 
     // Find the user and delete it.
@@ -117,7 +118,7 @@ export async function DeleteUser(req: Request, res: Response, next: NextFunction
 
     // Check if the user exists.
     if (!user) {
-      throw new Error('User not found.');
+      throw new BaseError('User not found.', 404);
     }
 
     // Send the response.

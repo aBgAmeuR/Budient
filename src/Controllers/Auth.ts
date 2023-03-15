@@ -3,6 +3,7 @@ import User from '../Models/User';
 import jwt from 'jsonwebtoken';
 import Hash from '../Helpers/Hash';
 import { config } from '../Config/Config';
+import BaseError from '../Helpers/BaseError';
 
 export async function Auth(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
@@ -10,7 +11,7 @@ export async function Auth(req: Request, res: Response, next: NextFunction): Pro
 
     // Check if the email and password are present.
     if (!email || !password) {
-      throw new Error('Missing email or password.');
+      throw new BaseError('Missing parameters.', 400);
     }
 
     // Find the user.
@@ -18,7 +19,7 @@ export async function Auth(req: Request, res: Response, next: NextFunction): Pro
 
     // Check if the user exists.
     if (!user) {
-      throw new Error('User not found.');
+      throw new BaseError('User not found.', 404);
     }
 
     // Check if the password is correct.
@@ -27,7 +28,7 @@ export async function Auth(req: Request, res: Response, next: NextFunction): Pro
     console.log(passwordHash, user.password);
 
     if (passwordHash !== user.password) {
-      throw new Error('Invalid password.');
+      throw new BaseError('Invalid password.', 401);
     }
 
     // Generate a JWT.
