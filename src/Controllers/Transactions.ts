@@ -53,7 +53,7 @@ export async function CreateTransaction(req: Request, res: Response, next: NextF
       message: 'Transaction created successfully.',
       error: false,
       data: {
-        transaction: newTransaction,
+        Id: newTransaction._id,
       },
     });
   } catch (err) {
@@ -93,6 +93,7 @@ export async function GetTransactions(req: Request, res: Response, next: NextFun
     next(err);
   }
 }
+
 export async function GetTransaction(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const userId = res.locals.userId;

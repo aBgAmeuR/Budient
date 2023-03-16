@@ -36,10 +36,10 @@ export async function CreateUser(req: Request, res: Response, next: NextFunction
 
     // Send the response.
     res.status(201).json({
-      message: 'User created successfully.',
       error: false,
+      message: 'User created successfully.',
       data: {
-        userId: user._id,
+        Id: user._id,
       },
     });
   } catch (err) {
