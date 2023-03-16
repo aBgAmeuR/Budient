@@ -105,12 +105,6 @@
   line-height: 18px;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .dark {
   color-scheme: dark;
 
@@ -123,3 +117,10 @@
   --pricipal-color: #2ec4b6;
   --secondary-color: #ff9f1c;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
