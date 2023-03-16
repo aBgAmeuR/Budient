@@ -1,22 +1,125 @@
 :root {
-  font-family: "Sora";
-  font-style: normal;
-  font-weight: 400;
+  font-family: Manrope, sans-serif;
 
   color-scheme: light;
 
-  --pricipal-bg: #F4F4F4;
-  --secondary-bg: #FCFCFC;
+  --pricipal-bg: #f4f4f4;
+  --secondary-bg: #fcfcfc;
 
-  --principal-text-color: #11142D;
-  --secondary-text-color: #6F767E;
+  --principal-text-color: #11142d;
+  --secondary-text-color: #6f767e;
+  --tertiary-text-color: #808191;
 
-  --pricipal-color: #2EC4B6;
-  --secondary-color: #FF9F1C;
+  --pricipal-color: #2ec4b6;
+  --secondary-color: #ff9f1c;
+}
+
+@mixin text-style-bold-37() {
+  font-size: 37px;
+  font-weight: 700;
+}
+@mixin text-style-bold-28() {
+  font-size: 28px;
+  font-weight: 700;
+}
+@mixin text-style-bold-25() {
+  font-size: 25px;
+  font-weight: 700;
+}
+@mixin text-style-bold-14() {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 22px;
+}
+@mixin text-style-bold-10() {
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 14px;
+}
+@mixin text-style-semibold-26() {
+  font-size: 26px;
+  font-weight: 600;
+}
+@mixin text-style-semibold-22() {
+  font-size: 22px;
+  font-weight: 600;
+}
+@mixin text-style-semibold-18() {
+  font-size: 18px;
+  font-weight: 600;
+}
+@mixin text-style-semibold-16() {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+@mixin text-style-semibold-14() {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+}
+@mixin text-style-semibold-12() {
+  font-size: 12px;
+  font-weight: 600;
+}
+@mixin text-style-medium-22() {
+  font-size: 22px;
+  font-weight: 500;
+}
+@mixin text-style-medium-18() {
+  font-size: 18px;
+  font-weight: 500;
+}
+@mixin text-style-medium-16() {
+  font-size: 16px;
+  font-weight: 500;
+}
+@mixin text-style-medium-14() {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+}
+@mixin text-style-medium-12() {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+}
+@mixin text-style-medium-11() {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+}
+@mixin text-style-regular-16() {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+@mixin text-style-regular-14() {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+}
+@mixin text-style-regular-12() {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --pricipal-bg: #111315;
+  --secondary-bg: #1A1D1F;
+
+  --principal-text-color: #EFEFEF;
+  --secondary-text-color: #6f767e;
+
+  --pricipal-color: #2ec4b6;
+  --secondary-color: #ff9f1c;
 }
