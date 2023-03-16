@@ -1,0 +1,22 @@
+:root {
+  font-family: "Sora";
+  font-style: normal;
+  font-weight: 400;
+
+  color-scheme: light;
+
+  --pricipal-bg: #F4F4F4;
+  --secondary-bg: #FCFCFC;
+
+  --principal-text-color: #11142D;
+  --secondary-text-color: #6F767E;
+
+  --pricipal-color: #2EC4B6;
+  --secondary-color: #FF9F1C;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
