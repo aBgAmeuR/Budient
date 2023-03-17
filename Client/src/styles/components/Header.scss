@@ -42,16 +42,22 @@ header {
     align-items: center;
     justify-content: flex-start;
     gap: 10px;
+    .infos {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 2px;
 
-    h2 {
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--principal-text-color);
-    }
-    p {
-      font-weight: 400;
-      font-size: 14px;
-      color: var(--secondary-text-color);
+      h2 {
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--principal-text-color);
+      }
+      p {
+        font-weight: 400;
+        font-size: 14px;
+        color: var(--secondary-text-color);
+      }
     }
   }
 }

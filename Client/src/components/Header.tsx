@@ -1,8 +1,11 @@
+import logo from "../assets/img/logo x64.webp";
+import defaultProfilePicture from "../assets/img/default-profil-picture.png";
+
 export default function Header() {
   return (
     <header>
       <div className="logo">
-        <img src="/img/logo x64.webp" alt="logo" height="40px" width="40px" />
+        <img src={logo} alt="logo" height="40px" width="40px" />
         <h1>Budient</h1>
       </div>
         <div className="searchBar">
@@ -15,7 +18,7 @@ export default function Header() {
         <input type="text" name="search"placeholder="Search Property. Customer etc" />
       </div>
       <div className="profileContainer">
-        <img src="/img/default-profil-picture.png" alt="Profil picture" height="40px" width="40px" />
+        <img src={defaultProfilePicture} alt="Profil picture" height="40px" width="40px" />
         <div className="infos">
           <h2>Antoine JOSSET</h2>
           <p>Full Stack Web Developer</p>

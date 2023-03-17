@@ -25,5 +25,9 @@
   ul li a.focus {
     background-color: var(--pricipal-color);
     color: white;
+
+    svg path{
+      fill: white;
+    }
   }
 }
