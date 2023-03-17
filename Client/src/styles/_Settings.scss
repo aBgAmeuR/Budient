@@ -1,0 +1,68 @@
+@font-face {
+  font-family: 'Manrope';
+  src: url("../assets/Manrope-Regular.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Manrope';
+  src: url("../assets/Manrope-Medium.woff2") format("woff2");
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'Manrope';
+  src: url("../assets/Manrope-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'Manrope';
+  src: url("../assets/Manrope-Bold.woff2") format("woff2");
+  font-weight: 700;
+}
+
+
+:root {
+  font-family: Manrope, sans-serif;
+
+  color-scheme: light;
+
+  --pricipal-bg: #f4f4f4;
+  --secondary-bg: #fcfcfc;
+
+  --principal-text-color: #11142d;
+  --secondary-text-color: #6f767e;
+  --tertiary-text-color: #808191;
+
+  --pricipal-color: #2ec4b6;
+  --secondary-color: #ff9f1c;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --pricipal-bg: #111315;
+  --secondary-bg: #1a1d1f;
+
+  --principal-text-color: #efefef;
+  --secondary-text-color: #6f767e;
+
+  --pricipal-color: #2ec4b6;
+  --secondary-color: #ff9f1c;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  background-color: var(--pricipal-bg);
+  color: var(--principal-text-color);
+  min-height: 100vh;
+  display: grid;
+  grid-template:
+    'header header' 70px
+    'sidebar main' 1fr
+    / 250px 1fr;
+    font-family: "Manrope", sans-serif;
+}

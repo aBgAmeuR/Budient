@@ -1,0 +1,63 @@
+header {
+  grid-area: header;
+  display: grid;
+  grid-template-columns: 250px 1fr auto;
+  grid-template-rows: 100%;
+  align-items: center;
+  padding: 0 20px;
+  background-color: var(--secondary-bg);
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .searchBar {
+    height: 38px;
+    width: 405px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 10px;
+    gap: 8px;
+    background-color: var(--pricipal-bg);
+    border-radius: 8px;
+    color: var(--tertiary-text-color);
+    font-size: 12px;
+    font-weight: 400;
+
+    input {
+      border: none;
+      background-color: transparent;
+      outline: 0;
+      width: 90%;
+      color: var(--tertiary-text-color);
+    }
+  }
+
+  .profileContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    .infos {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 2px;
+
+      h2 {
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--principal-text-color);
+      }
+      p {
+        font-weight: 400;
+        font-size: 14px;
+        color: var(--secondary-text-color);
+      }
+    }
+  }
+}
