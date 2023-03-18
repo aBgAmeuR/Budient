@@ -1,0 +1,38 @@
+#Transactions {
+  margin: 23px 20px 38px 25px;
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h2 {
+      font-weight: 700;
+      font-size: 25px;
+      line-height: 34px;
+    }
+    button {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 13px 20px;
+      gap: 10px;
+      background-color: var(--pricipal-color);
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Manrope';
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 22px;
+      color: white;
+    }
+  }
+
+  .content {
+    margin-top: 19px;
+    border-radius: 15px;
+    background-color: var(--secondary-bg);
+    height: calc(100% - 19px - 48px);
+    width: 100%;
+  }
+}
