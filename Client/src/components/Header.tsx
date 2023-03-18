@@ -1,7 +1,15 @@
 import logo from "../assets/img/logo x64.webp";
 import defaultProfilePicture from "../assets/img/default-profil-picture.png";
+import ProfileMenu from "./ProfileMenu";
 
 export default function Header() {
+  function ToggleMenu(): void {
+    const menu = document.querySelector(".profileMenu");
+    if (menu) {
+      menu.classList.toggle("active");
+    }
+  }
+
   return (
     <header>
       <div className="logo">
@@ -17,12 +25,13 @@ export default function Header() {
         </svg>
         <input type="text" name="search"placeholder="Search Property. Customer etc" />
       </div>
-      <div className="profileContainer">
+      <div className="profileContainer" onClick={ToggleMenu}>
         <img src={defaultProfilePicture} alt="Profil picture" height="40px" width="40px" />
         <div className="infos">
           <h2>Antoine JOSSET</h2>
           <p>Full Stack Web Developer</p>
         </div>
+        <ProfileMenu />
       </div>
     </header>
   );
