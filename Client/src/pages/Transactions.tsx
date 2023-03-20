@@ -1,5 +1,5 @@
-import DataTable, { TableColumn } from 'react-data-table-component';
 import ListItem from '../components/TransactionListItem';
+import { GridComponent, ColumnDirective, ColumnsDirective, Page, Inject } from '@syncfusion/ej2-react-grids';
 import React from 'react';
 
 type Transaction = {
@@ -9,32 +9,6 @@ type Transaction = {
   category: string;
   desc: string;
 };
-
-const columns: TableColumn<Transaction>[]= [
-  {
-    name: 'Name',
-    selector: row => row.name,
-  },
-  {
-    name: 'Date',
-    selector: row => row.date.toISOString().substring(0, 10),
-    sortable: true,
-  },
-  {
-    name: 'Amount',
-    selector: row => row.amount,
-    sortable: true,
-  },
-  {
-    name: 'Category',
-    selector: row => row.category,
-    sortable: true,
-  },
-  {
-    name: 'Description',
-    selector: row => row.desc,
-  },
-];
 
 const data = [
   {
@@ -60,17 +34,10 @@ const data = [
   },
 ];
 
-const paginationComponentOptions = {
-  selectAllRowsItem: false,
-  noRowsPerPage: true,
-};
-
 export default function Transactions() {
-  const [filterText, setFilterText] = React.useState('');
-	const filteredItems = data.filter(
-		item => item.name && item.name.toLowerCase().includes(filterText.toLowerCase()),
-	);
-
+  const [transactions, setTransactions] = React.useState<Transaction[]>(data);
+  console.log(data[0].date);
+  
   return (
     <main id="Transactions">
       <div className="top">
@@ -78,7 +45,16 @@ export default function Transactions() {
         <button>+ Add Transactions</button>
       </div>
       <div className="content">
-        <DataTable columns={columns} data={filteredItems} pagination paginationComponentOptions={paginationComponentOptions} />
+        <GridComponent dataSource={transactions} allowPaging={true} pageSettings={{ pageSize: 6 }}>
+          <ColumnsDirective>
+            <ColumnDirective field="name" headerText="Name" width="200" />
+            <ColumnDirective field="date" headerText="Date" width="115" format="dd/MM/yyyy" />
+            <ColumnDirective field="amount" headerText="Amount" width="115" format="0.00€" />
+            <ColumnDirective field="category" headerText="Category" width="100" />
+            <ColumnDirective field="desc" headerText="Description" width="auto" />
+          </ColumnsDirective>
+          <Inject services={[Page]} />
+        </GridComponent>
       </div>
     </main>
   );
