@@ -33,6 +33,7 @@
     border-radius: 15px;
     background-color: var(--secondary-bg);
     height: calc(100% - 19px - 48px);
-    width: 100%;
+    width: auto;
+    height: auto;
   }
 }
