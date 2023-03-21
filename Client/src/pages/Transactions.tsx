@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TransactionListItem from '../components/Transactions/TransactionListItem';
 import TransactionsFilters from '../components/Transactions/TransactionsFilters';
 import TransactionsList from '../components/Transactions/TransactionsList';
+import TransactionsPagination from '../components/Transactions/TransactionsPagination';
 
 export type Transaction = {
   id: string;
@@ -105,8 +106,16 @@ const Data: Transaction[] = [
 
 export default function Transactions() {
   const [filter, setFilter] = useState({});
+  const [data, setData] = useState(Data);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
+  const paginate = (items: Transaction[], page = 1, perPage = 6) => items.slice(perPage * (page - 1), perPage * page);
+  const paginatedData = paginate(data, page);
 
+  useEffect(() => {
+    setTotalPages(Math.ceil(data.length / 6));
+  }, [data]);
 
   return (
     <main id="Transactions">
@@ -116,30 +125,8 @@ export default function Transactions() {
       </div>
       <div className="content">
         <TransactionsFilters setFilter={setFilter} filter={filter} />
-        <TransactionsList transactions={Data} />
-        {/* <Table>
-          <tbody className="list">
-            {data.map((transaction) => (
-              <TransactionListItem {...transaction} key={transaction.id} />
-            ))}
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colSpan={5}>
-                <TablePagination
-                  rowsPerPageOptions={[]}
-                  component="div"
-                  count={Data.length}
-                  rowsPerPage={6}
-                  page={page}
-                  onPageChange={() => {
-                    handleChangePage;
-                  }}
-                />
-              </td>
-            </tr>
-          </tfoot>
-        </Table> */}
+        <TransactionsList transactions={paginatedData} />
+        <TransactionsPagination page={page} setPage={setPage} totalPages={totalPages} />
       </div>
     </main>
   );
