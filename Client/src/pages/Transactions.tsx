@@ -1,9 +1,9 @@
-import { Table, TablePagination, TableSortLabel } from '@mui/material';
 import { useState } from 'react';
-import TransactionListItem from '../components/TransactionListItem';
-import TransactionsFilters from '../components/TransactionsFilters';
+import TransactionListItem from '../components/Transactions/TransactionListItem';
+import TransactionsFilters from '../components/Transactions/TransactionsFilters';
+import TransactionsList from '../components/Transactions/TransactionsList';
 
-type Transaction = {
+export type Transaction = {
   id: string;
   name: string;
   date: Date;
@@ -104,15 +104,9 @@ const Data: Transaction[] = [
 ];
 
 export default function Transactions() {
-  const [data, setData] = useState<Transaction[]>(Data);
-  const [page, setPage] = useState(0);
   const [filter, setFilter] = useState({});
 
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
-  console.log(filter);
-  
+
 
   return (
     <main id="Transactions">
@@ -122,16 +116,8 @@ export default function Transactions() {
       </div>
       <div className="content">
         <TransactionsFilters setFilter={setFilter} filter={filter} />
-        <Table>
-          {/* <thead>
-            <tr>
-              <th>Name</th>
-              <th>Date</th>
-              <th>Amount</th>
-              <th>Category</th>
-              <th>Description</th>
-            </tr>
-          </thead> */}
+        <TransactionsList transactions={Data} />
+        {/* <Table>
           <tbody className="list">
             {data.map((transaction) => (
               <TransactionListItem {...transaction} key={transaction.id} />
@@ -153,7 +139,7 @@ export default function Transactions() {
               </td>
             </tr>
           </tfoot>
-        </Table>
+        </Table> */}
       </div>
     </main>
   );
