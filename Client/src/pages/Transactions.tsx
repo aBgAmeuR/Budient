@@ -111,11 +111,15 @@ export default function Transactions() {
   const [totalPages, setTotalPages] = useState(1);
   const [rowperpage, setRowperpage] = useState(6);
 
+  // console.log(Math.round((window.innerHeight * 0.55) / (70 + 16)));
+  
+
   const paginate = (items: Transaction[], page = 1, perPage = rowperpage) => items.slice(perPage * (page - 1), perPage * page);
   const paginatedData = paginate(data, page);
 
   useEffect(() => {
     setTotalPages(Math.ceil(data.length / rowperpage));
+    setRowperpage(Math.round((window.innerHeight * 0.52) / (70 + 16)));
   }, [data]);
 
   return (
