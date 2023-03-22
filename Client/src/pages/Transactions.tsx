@@ -110,11 +110,11 @@ export default function Transactions() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const paginate = (items: Transaction[], page = 1, perPage = 6) => items.slice(perPage * (page - 1), perPage * page);
+  const paginate = (items: Transaction[], page = 1, perPage = 5) => items.slice(perPage * (page - 1), perPage * page);
   const paginatedData = paginate(data, page);
 
   useEffect(() => {
-    setTotalPages(Math.ceil(data.length / 6));
+    setTotalPages(Math.ceil(data.length / 5));
   }, [data]);
 
   return (

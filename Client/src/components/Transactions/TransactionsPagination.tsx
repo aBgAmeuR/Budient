@@ -14,10 +14,33 @@ export default function TransactionsPagination({ page, setPage, totalPages }: Tr
       </div>
       <div className="right">
         <button onClick={() => setPage(page - 1)} disabled={page === 1}>
-          Prev
+          <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6 1.5L1 6.5L6 11.5"
+              stroke="#6F767E"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </button>
+        <div className="pages">
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button key={i} onClick={() => setPage(i + 1)} className={page === i + 1 ? 'active' : ''}>
+              {i + 1}
+            </button>
+          ))}
+        </div>
         <button onClick={() => setPage(page + 1)} disabled={page === totalPages}>
-          Next
+          <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M1 11.5L6 6.5L1 1.5"
+              stroke="#6F767E"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </button>
       </div>
     </div>
