@@ -40,7 +40,7 @@ export default function TransactionsFilters({
         <input type="text" placeholder="Search" onChange={handleSearch} />
       </div>
       <div className="date">
-        <input type="date" placeholder="Date" onChange={handleDate} />
+        <input type="month" placeholder="Date" value="" onChange={handleDate} />
       </div>
       <div className="amount">
         <input type="number" placeholder="Amount" onChange={handleAmount} />

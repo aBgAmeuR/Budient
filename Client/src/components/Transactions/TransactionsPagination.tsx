@@ -2,14 +2,15 @@ type TransactionsPaginationProps = {
   page: number;
   setPage: (page: number) => void;
   totalPages: number;
+  rowperpage: number;
 };
 
-export default function TransactionsPagination({ page, setPage, totalPages }: TransactionsPaginationProps) {
+export default function TransactionsPagination({ page, setPage, totalPages, rowperpage }: TransactionsPaginationProps) {
   return (
     <div className="pagination">
       <div className="left">
         <p>
-          Showing {1} to {totalPages} Propertys
+          Showing {1} to {rowperpage} Propertys
         </p>
       </div>
       <div className="right">
@@ -18,9 +19,9 @@ export default function TransactionsPagination({ page, setPage, totalPages }: Tr
             <path
               d="M6 1.5L1 6.5L6 11.5"
               stroke="#6F767E"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </button>
@@ -36,9 +37,9 @@ export default function TransactionsPagination({ page, setPage, totalPages }: Tr
             <path
               d="M1 11.5L6 6.5L1 1.5"
               stroke="#6F767E"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </button>
