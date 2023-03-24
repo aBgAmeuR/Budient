@@ -1,31 +1,51 @@
-type Filter = {
-  search?: string;
-  date?: string;
-  amount?: number;
-  category?: string;
-};
+import { Filter, Transaction } from '../../pages/Transactions';
 
 export default function TransactionsFilters({
   filter,
   setFilter,
+  setData,
+  Data,
 }: {
   filter: Filter;
   setFilter: (filter: Filter) => void;
-}) {
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFilter({ ...filter, search: event.target.value });
+    setData: (data: Transaction[]) => void;
+    Data: Transaction[];
+  }) {
+  
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilter({ ...filter, search: e.target.value });
+    setData(
+      Data.filter((transaction) => {
+        return transaction.name.toLowerCase().includes(e.target.value.toLowerCase());
+      })
+    );
   };
 
-  const handleDate = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFilter({ ...filter, date: event.target.value });
+  const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilter({ ...filter, date: e.target.value });
+    setData(
+      Data.filter((transaction) => {
+        return transaction.date.toLocaleDateString('en-GB').includes(e.target.value);
+      })
+    );
   };
 
-  const handleAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFilter({ ...filter, amount: Number(event.target.value) });
+  const handleAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilter({ ...filter, amount: Number(e.target.value) });
+    setData(
+      Data.filter((transaction) => {
+        return transaction.amount === Number(e.target.value);
+      })
+    );
   };
 
-  const handleCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setFilter({ ...filter, category: event.target.value });
+  const handleCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilter({ ...filter, category: e.target.value });
+    setData(
+      Data.filter((transaction) => {
+        return transaction.category === e.target.value;
+      })
+    );
   };
 
   return (
@@ -40,7 +60,7 @@ export default function TransactionsFilters({
         <input type="text" placeholder="Search" onChange={handleSearch} />
       </div>
       <div className="date">
-        <input type="month" placeholder="Date" value="" onChange={handleDate} />
+        <input type="month" placeholder="Date" onChange={handleDate} />
       </div>
       <div className="amount">
         <input type="number" placeholder="Amount" onChange={handleAmount} />

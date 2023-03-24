@@ -13,6 +13,13 @@ export type Transaction = {
   desc: string;
 };
 
+export type Filter = {
+  search?: string;
+  date?: string;
+  amount?: number;
+  category?: string;
+};
+
 const Data: Transaction[] = [
   {
     id: '6410f2bc57514ac42a80f11e',
@@ -111,9 +118,6 @@ export default function Transactions() {
   const [totalPages, setTotalPages] = useState(1);
   const [rowperpage, setRowperpage] = useState(6);
 
-  // console.log(Math.round((window.innerHeight * 0.55) / (70 + 16)));
-  
-
   const paginate = (items: Transaction[], page = 1, perPage = rowperpage) => items.slice(perPage * (page - 1), perPage * page);
   const paginatedData = paginate(data, page);
 
@@ -129,7 +133,7 @@ export default function Transactions() {
         <button>+ Add Transactions</button>
       </div>
       <div className="content">
-        <TransactionsFilters setFilter={setFilter} filter={filter} />
+        <TransactionsFilters setFilter={setFilter} filter={filter} setData={setData} Data={Data} />
         <TransactionsList transactions={paginatedData} />
         <TransactionsPagination page={page} setPage={setPage} totalPages={totalPages} rowperpage={rowperpage} />
       </div>
