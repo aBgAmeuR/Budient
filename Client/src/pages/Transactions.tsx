@@ -14,10 +14,10 @@ export type Transaction = {
 };
 
 export type Filter = {
-  search?: string;
-  date?: string;
-  amount?: number;
-  category?: string;
+  search: string;
+  date: string;
+  amount: number;
+  category: string;
 };
 
 const Data: Transaction[] = [
@@ -32,33 +32,33 @@ const Data: Transaction[] = [
   {
     id: '6410f2bc57514ac42a80f11e3',
     name: 'Amazon',
-    date: new Date('2021-04-06'),
+    date: new Date('2021-04-07'),
     amount: 100.03,
-    category: 'Maison',
+    category: 'Shopping',
     desc: 'Bought some food',
   },
   {
     id: '6410f2bc57514ac42a80f116',
-    name: 'Amazon',
-    date: new Date('2021-04-06'),
+    name: 'Nike',
+    date: new Date('2021-05-02'),
     amount: 100.03,
-    category: 'Maison',
+    category: 'Shopping',
     desc: 'Bought some food',
   },
   {
     id: '6410f2bc57514ac42a80f111',
     name: 'Amazon',
-    date: new Date('2021-04-06'),
+    date: new Date('2022-07-06'),
     amount: 100.03,
-    category: 'Maison',
+    category: 'Bills',
     desc: 'Bought some food',
   },
   {
     id: '6410f2bc57514ac42a80f11q',
-    name: 'Amazon',
-    date: new Date('2021-04-06'),
+    name: 'Super U',
+    date: new Date('2021-06-08'),
     amount: 100.03,
-    category: 'Maison',
+    category: 'Shopping',
     desc: 'Bought some food',
   },
   {
@@ -66,45 +66,45 @@ const Data: Transaction[] = [
     name: 'Amazon',
     date: new Date('2021-04-06'),
     amount: 100.03,
-    category: 'Maison',
+    category: 'Shopping',
     desc: 'Bought some food',
   },
   {
     id: '6410f2bc57514ac42a80f11l',
-    name: 'Amazon',
+    name: 'Super U',
     date: new Date('2021-04-06'),
     amount: 100.03,
-    category: 'Maison',
+    category: 'Shopping',
     desc: 'Bought some food',
   },
   {
     id: '6410f2bc57514ac42a80f11j',
     name: 'Carfour',
-    date: new Date('2021-11-04'),
+    date: new Date('2021-11-01'),
     amount: 9.0,
     category: 'Food',
     desc: 'Desciption',
   },
   {
     id: '6410f2bc57514ac42a80f11z',
-    name: 'Carfour',
+    name: 'Train',
     date: new Date('2021-11-04'),
     amount: 9.0,
-    category: 'Food',
+    category: 'Shopping',
     desc: 'Desciption',
   },
   {
     id: '6410f2bc57514ac42a80f11g',
     name: 'Carfour',
-    date: new Date('2021-11-04'),
+    date: new Date('2021-11-21'),
     amount: 9.0,
     category: 'Food',
     desc: 'Desciption',
   },
   {
     id: '6410f2bc57514ac42a80f11f',
-    name: 'Carfour',
-    date: new Date('2021-11-04'),
+    name: 'Adidas',
+    date: new Date('2021-11-03'),
     amount: 9.0,
     category: 'Food',
     desc: 'Desciption',
@@ -112,14 +112,27 @@ const Data: Transaction[] = [
 ];
 
 export default function Transactions() {
-  const [filter, setFilter] = useState({});
+  const [filter, setFilter] = useState({ search: '', date: '', amount: 0, category: '' });
   const [data, setData] = useState(Data);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [rowperpage, setRowperpage] = useState(6);
 
-  const paginate = (items: Transaction[], page = 1, perPage = rowperpage) => items.slice(perPage * (page - 1), perPage * page);
+  const paginate = (items: Transaction[], page = 1, perPage = rowperpage) =>
+    items.slice(perPage * (page - 1), perPage * page);
   const paginatedData = paginate(data, page);
+
+  useEffect(() => {
+    const filteredData = Data.filter((transaction) => {
+      if (filter.search === '' && filter.date === '' && filter.amount === 0 && (filter.category === '' ||filter.category === 'all')) return true;
+      if (filter.search !== '' && transaction.name.toLowerCase().includes(filter.search.toLowerCase())) return true;
+      if (filter.date !== '' && transaction.date.toDateString() === new Date(filter.date).toDateString()) return true;
+      if (filter.amount !== 0 && transaction.amount === filter.amount) return true;
+      if (filter.category !== '' && transaction.category.toLowerCase() === filter.category.toLowerCase()) return true;
+      return false;
+    });
+    setData(filteredData);
+  }, [filter]);
 
   useEffect(() => {
     setTotalPages(Math.ceil(data.length / rowperpage));
@@ -133,7 +146,7 @@ export default function Transactions() {
         <button>+ Add Transactions</button>
       </div>
       <div className="content">
-        <TransactionsFilters setFilter={setFilter} filter={filter} setData={setData} Data={Data} />
+        <TransactionsFilters setFilter={setFilter} filter={filter} />
         <TransactionsList transactions={paginatedData} />
         <TransactionsPagination page={page} setPage={setPage} totalPages={totalPages} rowperpage={rowperpage} />
       </div>

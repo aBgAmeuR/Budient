@@ -3,49 +3,24 @@ import { Filter, Transaction } from '../../pages/Transactions';
 export default function TransactionsFilters({
   filter,
   setFilter,
-  setData,
-  Data,
 }: {
   filter: Filter;
   setFilter: (filter: Filter) => void;
-    setData: (data: Transaction[]) => void;
-    Data: Transaction[];
-  }) {
-  
+}) {
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilter({ ...filter, search: e.target.value });
-    setData(
-      Data.filter((transaction) => {
-        return transaction.name.toLowerCase().includes(e.target.value.toLowerCase());
-      })
-    );
   };
 
   const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilter({ ...filter, date: e.target.value });
-    setData(
-      Data.filter((transaction) => {
-        return transaction.date.toLocaleDateString('en-GB').includes(e.target.value);
-      })
-    );
   };
 
   const handleAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilter({ ...filter, amount: Number(e.target.value) });
-    setData(
-      Data.filter((transaction) => {
-        return transaction.amount === Number(e.target.value);
-      })
-    );
   };
 
   const handleCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFilter({ ...filter, category: e.target.value });
-    setData(
-      Data.filter((transaction) => {
-        return transaction.category === e.target.value;
-      })
-    );
   };
 
   return (
