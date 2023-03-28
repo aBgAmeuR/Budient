@@ -17,6 +17,7 @@ export type Filter = {
   search: string;
   date: string;
   amount: number;
+  amountOrder: string;
   category: string;
 };
 
@@ -112,7 +113,7 @@ const Data: Transaction[] = [
 ];
 
 export default function Transactions() {
-  const [filter, setFilter] = useState({ search: '', date: '', amount: 0, category: '' });
+  const [filter, setFilter] = useState({ search: '', date: '', amount: 0, amountOrder: 'asc', category: '' });
   const [data, setData] = useState(Data);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -124,14 +125,15 @@ export default function Transactions() {
 
   useEffect(() => {
     const filteredData = Data.filter((transaction) => {
-      if (filter.search === '' && filter.date === '' && filter.amount === 0 && (filter.category === '' ||filter.category === 'all')) return true;
+      if (filter.search === '' && filter.date === '' && filter.category === '') return true;
       if (filter.search !== '' && transaction.name.toLowerCase().includes(filter.search.toLowerCase())) return true;
       if (filter.date !== '' && transaction.date.toDateString() === new Date(filter.date).toDateString()) return true;
-      if (filter.amount !== 0 && transaction.amount === filter.amount) return true;
       if (filter.category !== '' && transaction.category.toLowerCase() === filter.category.toLowerCase()) return true;
       return false;
     });
     setData(filteredData);
+    setTotalPages(Math.ceil(filteredData.length / rowperpage));
+    setPage(1);
   }, [filter]);
 
   useEffect(() => {
@@ -153,3 +155,18 @@ export default function Transactions() {
     </main>
   );
 }
+
+
+
+
+// useEffect(() => {
+//   const filteredData = Data.filter((transaction) => {
+//     if (filter.search === '' && filter.date === '' && filter.amount === 0 && (filter.category === '' || filter.category === 'all')) return true;
+//     if (filter.search !== '' && transaction.name.toLowerCase().includes(filter.search.toLowerCase())) return true;
+//     if (filter.date !== '' && transaction.date.toDateString() === new Date(filter.date).toDateString()) return true;
+//     if (filter.amount !== 0 && transaction.amount === filter.amount) return true;
+//     if (filter.category !== '' && transaction.category.toLowerCase() === filter.category.toLowerCase()) return true;
+//     return false;
+//   });
+//   setData(filteredData);
+// }, [filter]);

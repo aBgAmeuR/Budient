@@ -19,6 +19,10 @@ export default function TransactionsFilters({
     setFilter({ ...filter, amount: Number(e.target.value) });
   };
 
+  const handleAmountOrder = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilter({ ...filter, amountOrder: e.target.value });
+  };
+
   const handleCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFilter({ ...filter, category: e.target.value });
   };
@@ -39,6 +43,7 @@ export default function TransactionsFilters({
       </div>
       <div className="amount">
         <input type="number" placeholder="Amount" onChange={handleAmount} />
+        
       </div>
       <div className="category">
         <select onChange={handleCategory}>

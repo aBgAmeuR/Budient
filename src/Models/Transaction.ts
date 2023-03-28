@@ -13,6 +13,10 @@ const TransactionSchema: Schema = new Schema({
     type: Date,
     require: [true, 'Please enter a date.'],
   },
+  name: {
+    type: String,
+    require: [true, 'Please enter a name.'],
+  },
   amount: {
     type: Number,
     require: [true, 'Please enter an amount.'],
