@@ -43,7 +43,7 @@ export default function TransactionsFilters({
       </div>
       <div className="amount">
         <input type="number" placeholder="Amount" onChange={handleAmount} />
-        <button onClick={handleAmountOrder}>
+        <button onClick={handleAmountOrder} className='AmountOrder'>
           {filter.amountOrder === 'asc' ? (
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_8862_10587)">
@@ -70,8 +70,7 @@ export default function TransactionsFilters({
                 </clipPath>
               </defs>
             </svg>
-          )
-          }
+          )}
         </button>
       </div>
       <div className="category">

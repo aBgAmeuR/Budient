@@ -85,7 +85,7 @@
           font-size: 16px;
           line-height: 24px;
           color: var(--principal-text-color);
-          width: 100px;
+          width: 125px;
         }
         .desc {
           font-weight: 400;
@@ -162,8 +162,22 @@
           width: 220px;
         }
       }
-      .amount input {
-        width: 100px;
+      .amount {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+        input {
+          width: 100px;
+        }
+        button {
+          border: none;
+          background-color: transparent;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
       }
       .category select {
         border: none;
@@ -224,6 +238,40 @@
         button.active {
           background-color: var(--pricipal-color);
           color: white;
+        }
+      }
+    }
+
+    .addItemTransaction {
+      margin-right: 45px;
+      margin-bottom: 16px;
+
+      .right {
+        input {
+          border: none;
+          // border-bottom: var(--principal-text-color) 1px solid;
+          background-color: transparent;
+          outline: 0;
+        }
+
+        .name {
+          width: 155px;
+          margin-right: 5px;
+        }
+        .date {
+          width: 115px;
+          margin-right: 5px;
+        }
+        .amount {
+          width: 100px;
+          margin-right: 5px;
+        }
+        .category {
+          width: 125px;
+          margin-right: 10px;
+        }
+        .desc {
+          width: auto;
         }
       }
     }
