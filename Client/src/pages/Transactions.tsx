@@ -124,21 +124,38 @@ export default function Transactions() {
   const paginatedData = paginate(data, page);
 
   useEffect(() => {
-    const filteredData = Data.filter((transaction) => {
-      if (filter.search === '' && filter.date === '' && filter.category === '') return true;
-      if (filter.search !== '' && transaction.name.toLowerCase().includes(filter.search.toLowerCase())) return true;
-      if (filter.date !== '' && transaction.date.toDateString() === new Date(filter.date).toDateString()) return true;
-      if (filter.category !== '' && transaction.category.toLowerCase() === filter.category.toLowerCase()) return true;
-      return false;
-    });
+    let filteredData = Data
+
+    if (filter.search !== '') {
+      filteredData = filteredData.filter((transaction) => transaction.name.toLowerCase().includes(filter.search.toLowerCase()));
+    }
+
+    if (filter.date !== '') {
+      filteredData = filteredData.filter((transaction) => {
+        transaction.date.toISOString().slice(0, 7) === filter.date.toString();
+        console.log(transaction.date.toISOString().slice(0, 7));
+        console.log(filter.date);
+      });
+
+    }
+
+    if (filter.amount !== 0 && filter.amountOrder === 'asc') {
+      filteredData = filteredData.filter((transaction) => transaction.amount >= filter.amount);
+    } else if (filter.amount !== 0 && filter.amountOrder === 'desc') {
+      filteredData = filteredData.filter((transaction) => transaction.amount <= filter.amount);
+    }
+
+    if (filter.category !== '' && filter.category !== 'all') {
+      filteredData = filteredData.filter((transaction) => transaction.category === filter.category);
+    }
+
     setData(filteredData);
-    setTotalPages(Math.ceil(filteredData.length / rowperpage));
-    setPage(1);
   }, [filter]);
 
   useEffect(() => {
     setTotalPages(Math.ceil(data.length / rowperpage));
     setRowperpage(Math.round((window.innerHeight * 0.52) / (70 + 16)));
+    setPage(1);
   }, [data]);
 
   return (
