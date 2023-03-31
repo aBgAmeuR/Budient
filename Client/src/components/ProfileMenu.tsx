@@ -17,7 +17,7 @@ export default function ProfileMenu() {
         </Link>
       </div>
       <div className="item">
-        <Link to="/">
+        <Link to="/connexion">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M9 1.5C10.2426 1.5 11.25 2.50736 11.25 3.75V8.25H7.5C7.08579 8.25 6.75 8.58579 6.75 9C6.75 9.41421 7.08579 9.75 7.5 9.75H11.25V14.25C11.25 15.4926 10.2426 16.5 9 16.5H4.5C3.25736 16.5 2.25 15.4926 2.25 14.25V3.75C2.25 2.50736 3.25736 1.5 4.5 1.5H9Z"
