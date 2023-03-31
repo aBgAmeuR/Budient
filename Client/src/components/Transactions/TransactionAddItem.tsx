@@ -6,7 +6,7 @@ export default function TransactionAddItem({ setAddTransaction }: { setAddTransa
       <div className="right">
         <input className="name" type='text' placeholder='Name'></input>
         <input className="date" type='date'></input>
-        <input className="amount" type='number'>
+        <input className="amount" type='number' placeholder='Amount'>
         </input>
         <select className="category">
           <option value="other">Other</option>
