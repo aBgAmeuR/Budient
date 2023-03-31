@@ -1,16 +1,150 @@
 #Connexion {
   display: grid;
   grid-template: 100vh / 50% 50%;
+  background-color: var(--pricipal-bg);
+  color: var(--principal-text-color);
+
+  .left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   .image {
     display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+  }
+
+  .login,
+  .register {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 37px;
+    line-height: 51px;
+    margin-bottom: 10px;
+    color: var(--principal-text-color);
+  }
+
+  h2 {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 9px;
+    color: var(--tertiary-text-color);
+  }
+
+  label {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--principal-text-color);
+    margin: 15px 0 5px 0;
+  }
+
+  input[type='Email'],
+  input[type='Password'] {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 11px 12px;
+    gap: 10px;
+    border: 1px solid var(--input-border-color);
+    color: var(--tertiary-text-color);
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    border-radius: 10px;
+    background-color: transparent;
+  }
+
+  input[type='Email']:focus,
+  input[type='Password']:focus {
+    outline: none;
+    border: 1px solid var(--tertiary-text-color);
+  }
+
+  input[type='checkbox'] {
+    border: 1px solid var(--input-border-color);
+    width: 16px;
+    height: 16px;
+  }
+
+  button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 11px 154px;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: white;
+    background-color: var(--pricipal-color);
+    border-radius: 10px;
+    border: none;
+  }
+
+  p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+  }
+
+  a {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--pricipal-color);
+    text-decoration: none;
+  }
+
+  .buttom {
+    margin-top: 30px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .middle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0 20px 0;
+    .remember {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 5px;
+    }
+
+    label {
+      margin: 0;
+    }
+  }
+
+  .bottom {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
   }
 }
