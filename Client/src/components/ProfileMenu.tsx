@@ -1,6 +1,18 @@
 import { Link } from 'react-router-dom';
 
 export default function ProfileMenu() {
+  const handleTheme = () => {
+    const theme = localStorage.getItem('theme');
+
+    if (theme === 'dark') {
+      document.body.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.body.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  }
+
   return (
     <div className="profileMenu">
       <div className="item">
@@ -32,7 +44,7 @@ export default function ProfileMenu() {
         </Link>
       </div>
       <div className="item">
-        <div onClick={() => document.getElementById('root')?.classList.toggle('dark')}>
+        <div onClick={handleTheme} className="dark-mode">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               fillRule="evenodd"

@@ -10,10 +10,16 @@ import Sidebar from './components/Sidebar';
 import Connexion from './pages/Connexion';
 
 function App() {
+  const theme = localStorage.getItem('theme');
+
+  if (theme === 'dark') {
+    document.body.classList.add('dark');
+  } else {  
+    document.body.classList.remove('dark');
+  }
+  
   return (
     <>
-      {/* <Header />
-      <Sidebar /> */}
       <Routes>
         <Route path="/dashboard" element={
           <div id='grids'>
