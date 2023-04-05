@@ -37,6 +37,22 @@ const dataFetch: Transaction[] = [
     desc: 'Desciption',
   },
   {
+    id: '6410f2bc57514ac42a80f11e',
+    name: 'Apple',
+    date: new Date('2020-10-04'),
+    amount: 52.01,
+    category: 'Food',
+    desc: 'Desciption',
+  },
+  {
+    id: '6410f2bc57514ac42a80f11e',
+    name: 'Apple',
+    date: new Date('2020-09-04'),
+    amount: 350,
+    category: 'Food',
+    desc: 'Desciption',
+  },
+  {
     id: '6410f2bc57514ac42a80f11e3',
     name: 'Amazon',
     date: new Date('2021-04-07'),
@@ -147,27 +163,86 @@ const DataPerMonth = (data: Transaction[]) => {
     return dateA.getTime() - dateB.getTime();
   });
 
+  // add missing month
+  const firstDate = new Date(dataPerMonth[0].month);
+  const lastDate = new Date(dataPerMonth[dataPerMonth.length - 1].month);
+  
+  const missingMonth: DataPerMonth[] = [];
+  let currentDate = firstDate;
+  while (currentDate <= lastDate) {
+    const month = currentDate.getMonth();
+    const year = currentDate.getFullYear();
+    const date = new Date(year, month);
+
+    const dataPerMonthIndex = dataPerMonth.findIndex(
+      (data) => data.month === date.toDateString()
+    );
+
+    if (dataPerMonthIndex === -1) {
+      missingMonth.push({
+        month: date.toDateString(),
+        amount: 0,
+      });
+    }
+    currentDate.setMonth(currentDate.getMonth() + 1);
+  }
+  
   return dataPerMonth;
 
 };
 
-const dataPerMonth = DataPerMonth(dataFetch);
 
 export default function Analytics() {
+  const [data, setData] = React.useState<DataPerMonth[]>(DataPerMonth(dataFetch));
+  const [datePeriod, setDatePeriod] = React.useState('last6month');
+
+  const HanbleDatePeriodChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setDatePeriod(e.target.value);
+  };
+
+  useEffect(() => {
+    switch (datePeriod) {
+      case 'last6month':
+        setData(DataPerMonth(dataFetch).slice(-6));
+        break;
+      case 'lastYear':
+        setData(DataPerMonth(dataFetch).slice(-12));
+        break;
+      case 'last3year':
+        setData(DataPerMonth(dataFetch).slice(-36));
+        break;
+      case 'alltime':
+        setData(DataPerMonth(dataFetch));
+        break;
+      default:
+        setData(DataPerMonth(dataFetch).slice(-6));
+        break;
+    }
+  }, [datePeriod]);
+
   return (
     <main id="Analytics">
       <div className="top">
         <h2>Analytics</h2>
       </div>
       <div className="content">
+        <h3>Total Revenue</h3>
+        <div className="right">
+          <select name="datePeriod" id="datePeriodRevenu" onChange={HanbleDatePeriodChange}>
+            <option value="last6month">Last 6 month</option>
+            <option value="lastYear">Last year</option>
+            <option value="last3year">Last 3 year</option>
+            <option value="alltime">All time</option>
+          </select>
+        </div>
         <div className="chart">
           <Line
             data={{
-              labels: dataPerMonth.map((data) => data.month.split(' ')[1] + ' ' + data.month.split(' ')[3]),
+              labels: data.map((data) => data.month),
               datasets: [
                 {
                   label: 'Amount',
-                  data: dataPerMonth.map((data) => data.amount),
+                  data: data.map((data) => data.amount),
                   fill: false,
                   backgroundColor: '#ff9f1c',
                   borderColor: '#ff9f1c',
@@ -187,6 +262,7 @@ export default function Analytics() {
                 legend: {
                   display: true,
                   position: 'top',
+                  // align: 'end',
                   labels: {
                     color: '#fff',
                     font: {
@@ -209,9 +285,8 @@ export default function Analytics() {
                   },
                 },
               },
-              animation: {
-                duration: 300,
-              },
+              animation: false,
+              devicePixelRatio: 2,
             }}
           />
         </div>
