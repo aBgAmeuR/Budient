@@ -141,6 +141,7 @@ const DataPerMonth = (data: Transaction[]) => {
     const month = transaction.date.getMonth();
     const year = transaction.date.getFullYear();
     const date = new Date(year, month);
+    
 
     const dataPerMonthIndex = dataPerMonth.findIndex(
       (data) => data.month === date.toDateString()
