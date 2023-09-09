@@ -8,99 +8,103 @@ header {
   padding: 15px 20px;
   background-color: var(--secondary-bg);
   position: relative;
-  
-
-  .logo {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 12px;
-  }
-
-  .searchBar {
-    height: 38px;
-    width: 405px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0 10px;
-    gap: 8px;
-    background-color: var(--pricipal-bg);
-    border-radius: 8px;
-    color: var(--tertiary-text-color);
-    font-size: 12px;
-    font-weight: 400;
-
-    input {
-      border: none;
-      background-color: transparent;
-      outline: 0;
-      width: 90%;
-      color: var(--tertiary-text-color);
-    }
-  }
-
-  .profileContainer {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-    .infos {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 2px;
-
-      h2 {
-        font-weight: 600;
-        font-size: 14px;
-        color: var(--principal-text-color);
-      }
-      p {
-        font-weight: 400;
-        font-size: 14px;
-        color: var(--secondary-text-color);
-      }
-    }
-  }
-  .profileMenu {
-    display: none;
-  }
-  .profileMenu.active {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: calc(100% + 4px);
-    background-color: var(--secondary-bg);
-    border-radius: 10px;
-    box-shadow: 0px 40px 50px 1px rgba(120, 114, 114, 0.15);
-    z-index: 99;
-    padding: 10px;
-
-    .item > a,
-    .item > div {
-      display: flex;
-      align-items: center;
-      flex-direction: row;
-      height: 42px;
-      width: 172px;
-      text-decoration: none;
-      padding: 10px;
-      gap: 10px;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 22px;
-      color: var(--tertiary-text-color);
-    }
-    .item > div {
-      user-select: none;
-      cursor: pointer;
-    }
-  }
 }
-.dark {
+
+header .logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+}
+header .logo h1 {
+  color: var(--principal-text-color);
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+header .searchBar {
+  height: 38px;
+  width: 405px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 10px;
+  gap: 8px;
+  background-color: var(--pricipal-bg);
+  border-radius: 8px;
+  color: var(--tertiary-text-color);
+  font-size: 12px;
+  font-weight: 400;
+}
+header .searchBar input {
+  border: none;
+  background-color: transparent;
+  outline: 0;
+  width: 90%;
+  color: var(--tertiary-text-color);
+}
+
+header .profileContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+header .profileContainer .infos {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
+}
+header .profileContainer .infos h2 {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--principal-text-color);
+}
+header .profileContainer .infos p {
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--secondary-text-color);
+}
+
+header .profileMenu {
+  display: none;
+}
+header .profileMenu.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: calc(100% + 4px);
+  background-color: var(--secondary-bg);
+  border-radius: 10px;
+  box-shadow: 0px 40px 50px 1px rgba(120, 114, 114, 0.15);
+  z-index: 99;
+  padding: 10px;
+}
+header .profileMenu.active .item > a,
+header .profileMenu.active .item > div {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  height: 42px;
+  width: 172px;
+  text-decoration: none;
+  padding: 10px;
+  gap: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--tertiary-text-color);
+}
+.item > div {
+  user-select: none;
+  cursor: pointer;
+}
+
+header .dark {
   .profileMenu {
     box-shadow: 0px 60px 30px -10px rgba(0, 0, 0, 0.2);
     display: none;
