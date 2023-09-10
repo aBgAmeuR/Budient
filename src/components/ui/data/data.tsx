@@ -1,77 +1,35 @@
-import {
-  ArrowDownIcon,
-  ArrowRightIcon,
-  ArrowUpIcon,
-  CheckCircledIcon,
-  CircleIcon,
-  CrossCircledIcon,
-  QuestionMarkCircledIcon,
-  StopwatchIcon,
-} from "@radix-ui/react-icons"
-
-export const labels = [
-  {
-    value: "bug",
-    label: "Bug",
-  },
-  {
-    value: "feature",
-    label: "Feature",
-  },
-  {
-    value: "documentation",
-    label: "Documentation",
-  },
-]
+import { DotsHorizontalIcon } from '@radix-ui/react-icons';
+import { Utensils, Clapperboard, Bus, ShoppingCart, CircleDollarSign } from 'lucide-react';
 
 export const categories = [
   {
-    value: "Food",
-    label: "Food",
-    icon: QuestionMarkCircledIcon,
+    value: 'Food',
+    label: 'Food',
+    icon: Utensils,
   },
   {
-    value: "Entertainement",
-    label: "Entertainement",
-    icon: CircleIcon,
+    value: 'Entertainement',
+    label: 'Entertainement',
+    icon: Clapperboard,
   },
   {
-    value: "Transportation",
-    label: "Transportation",
-    icon: StopwatchIcon,
+    value: 'Transportation',
+    label: 'Transportation',
+    icon: Bus,
   },
   {
-    value: "Shopping",
-    label: "Shopping",
-    icon: CheckCircledIcon,
+    value: 'Shopping',
+    label: 'Shopping',
+    icon: ShoppingCart,
   },
   {
-    value: "Bills",
-    label: "Bills",
-    icon: CrossCircledIcon,
+    value: 'Bills',
+    label: 'Bills',
+    icon: CircleDollarSign,
   },
   {
-    value: "Other",
-    label: "Other",
-    icon: CrossCircledIcon,
+    value: 'Other',
+    label: 'Other',
+    icon: DotsHorizontalIcon,
   },
-  
-]
-
-export const priorities = [
-  {
-    label: "Low",
-    value: "low",
-    icon: ArrowDownIcon,
-  },
-  {
-    label: "Medium",
-    value: "medium",
-    icon: ArrowRightIcon,
-  },
-  {
-    label: "High",
-    value: "high",
-    icon: ArrowUpIcon,
-  },
-]
+];
