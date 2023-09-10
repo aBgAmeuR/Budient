@@ -1,0 +1,90 @@
+[
+  {
+    "id": "6410f2bc57514ac42a80f11e",
+    "name": "Apple",
+    "date": "2020-11-04T00:00:00.000Z",
+    "amount": 11.22,
+    "category": "Food",
+    "desc": "Desciption"
+  },
+  {
+    "id": "6410f2bc57514ac42a80f11e3",
+    "name": "Amazon",
+    "date": "2021-04-07T00:00:00.000Z",
+    "amount": 100.03,
+    "category": "Shopping",
+    "desc": "Bought some food"
+  },
+  {
+    "id": "6410f2bc57514ac42a80f116",
+    "name": "Nike",
+    "date": "2021-05-02T00:00:00.000Z",
+    "amount": 100.03,
+    "category": "Shopping",
+    "desc": "Bought some food"
+  },
+  {
+    "id": "6410f2bc57514ac42a80f111",
+    "name": "Amazon",
+    "date": "2022-07-06T00:00:00.000Z",
+    "amount": 100.03,
+    "category": "Bills",
+    "desc": "Bought some food"
+  },
+  {
+    "id": "6410f2bc57514ac42a80f11q",
+    "name": "Super U",
+    "date": "2021-06-08T00:00:00.000Z",
+    "amount": 100.03,
+    "category": "Shopping",
+    "desc": "Bought some food"
+  },
+  {
+    "id": "6410f2bc57514ac42a80f11m",
+    "name": "Amazon",
+    "date": "2021-04-06T00:00:00.000Z",
+    "amount": 100.03,
+    "category": "Shopping",
+    "desc": "Bought some food"
+  },
+  {
+    "id": "6410f2bc57514ac42a80f11l",
+    "name": "Super U",
+    "date": "2021-04-06T00:00:00.000Z",
+    "amount": 56.99,
+    "category": "Shopping",
+    "desc": "Bought some food"
+  },
+  {
+    "id": "6410f2bc57514ac42a80f11j",
+    "name": "Carfour",
+    "date": "2021-10-01T00:00:00.000Z",
+    "amount": 9.0,
+    "category": "Food",
+    "desc": "Desciption"
+  },
+  {
+    "id": "6410f2bc57514ac42a80f11z",
+    "name": "Train",
+    "date": "2021-11-04T00:00:00.000Z",
+    "amount": 9.0,
+    "category": "Shopping",
+    "desc": "Desciption"
+  },
+  {
+    "id": "6410f2bc57514ac42a80f11g",
+    "name": "Carfour",
+    "date": "2021-11-21T00:00:00.000Z",
+    "amount": 9.0,
+    "category": "Food",
+    "desc": "Desciption"
+  },
+  {
+    "id": "6410f2bc57514ac42a80f11f",
+    "name": "Adidas",
+    "date": "2021-11-03T00:00:00.000Z",
+    "amount": 9.0,
+    "category": "Food",
+    "desc": "Desciption"
+  }
+]

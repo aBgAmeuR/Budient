@@ -1,5 +1,5 @@
 import React from 'react';
-import MainNavButton from './ui/main-nav-button';
+import MainNavButton from './ui/main-nav/main-nav-button';
 
 type Props = {};
 

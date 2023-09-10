@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import logo from '@/assets/img/logox64.webp';
 import defaultProfilePicture from '@/assets/img/default-profile-picture.png';
+import { UserNav } from './ui/page-header/user-nav';
 
 type Props = {};
 
@@ -22,11 +23,12 @@ export default function pageHeader({}: Props) {
         <input type="text" name="search" placeholder="Search Property. Customer etc" />
       </div>
       <div className="profileContainer">
-        <Image src={defaultProfilePicture} alt="Profil picture" height={40} width={40} />
+        <UserNav />
+        {/* <Image src={defaultProfilePicture} alt="Profil picture" height={40} width={40} />
         <div className="infos">
           <h2>Antoine JOSSET</h2>
           <p>Full Stack Web Developer</p>
-        </div>
+        </div> */}
       </div>
     </header>
   );
