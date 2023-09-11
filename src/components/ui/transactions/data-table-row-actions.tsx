@@ -2,6 +2,7 @@
 
 import { DotsHorizontalIcon } from "@radix-ui/react-icons"
 import { Row } from "@tanstack/react-table"
+import { categories } from "../data/data"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -41,26 +42,31 @@ export function DataTableRowActions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem>Make a copy</DropdownMenuItem>
-        <DropdownMenuItem>Favorite</DropdownMenuItem>
+        <DropdownMenuItem>
+          Edit
+          <DropdownMenuShortcut>E</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          Make a copy
+          <DropdownMenuShortcut>C</DropdownMenuShortcut>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
+          <DropdownMenuSubTrigger>Category</DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
             <DropdownMenuRadioGroup value={task.name}>
-              {/* {labels.map((label) => (
-                <DropdownMenuRadioItem key={label.value} value={label.value}>
-                  {label.label}
+              {categories.map((categorie) => (
+                <DropdownMenuRadioItem key={categorie.value} value={categorie.value}>
+                  {categorie.label}
                 </DropdownMenuRadioItem>
-              ))} */}
+              ))}
             </DropdownMenuRadioGroup>
           </DropdownMenuSubContent>
         </DropdownMenuSub>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           Delete
-          <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+          <DropdownMenuShortcut>⌫</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
