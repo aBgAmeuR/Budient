@@ -1,0 +1,146 @@
+#Connexion {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template: 1fr / minmax(600px, 1fr) 1fr;
+  background-color: var(--pricipal-bg);
+  color: var(--principal-text-color);
+}
+#Connexion .left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#Connexion .image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#Connexion .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+}
+#Connexion .image #imgDarkMode {
+  position: absolute;
+  width: 445px;
+  height: auto;
+  transform: skew(5.7deg, 1deg);
+  top: 27.4%;
+  left: 55.45%;
+}
+#Connexion .login, #Connexion .register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#Connexion h1 {
+  font-weight: 700;
+  font-size: 37px;
+  line-height: 51px;
+  margin-bottom: 10px;
+  color: var(--principal-text-color);
+}
+#Connexion h2 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 9px;
+  color: var(--tertiary-text-color);
+}
+#Connexion label {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--principal-text-color);
+  margin: 15px 0 5px 0;
+}
+#Connexion input[type='username'], #Connexion input[type='Password'] {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 11px 12px;
+  gap: 10px;
+  border: 1px solid var(--input-border-color);
+  color: var(--tertiary-text-color);
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  border-radius: 10px;
+  background-color: transparent;
+}
+#Connexion input[type='username']:focus, #Connexion input[type='Password']:focus {
+  outline: none;
+  border: 1px solid var(--tertiary-text-color);
+}
+#Connexion input[type='checkbox'] {
+  border: 1px solid var(--input-border-color);
+  width: 16px;
+  height: 16px;
+}
+#Connexion button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 11px 154px;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: white;
+  background-color: var(--pricipal-color);
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+#Connexion p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+}
+#Connexion a {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--pricipal-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+#Connexion .buttom {
+  margin-top: 30px;
+}
+#Connexion .form {
+  display: flex;
+  flex-direction: column;
+}
+#Connexion .middle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0 20px 0;
+}
+#Connexion .middle .remember {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+#Connexion .middle label {
+  margin: 0;
+}
+#Connexion #ConfirmPassword {
+  margin-bottom: 20px;
+}
+#Connexion .bottom {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}

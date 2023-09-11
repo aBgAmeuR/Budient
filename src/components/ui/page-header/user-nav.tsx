@@ -12,9 +12,11 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useTheme } from 'next-themes';
+import { useRouter } from 'next/navigation';
 
 export function UserNav() {
   const { theme, setTheme } = useTheme();
+  const router = useRouter();
 
   const handleThemeToggle = () => {
     if (theme === 'dark') {
@@ -23,6 +25,11 @@ export function UserNav() {
       setTheme('dark');
     }
   };
+
+  const handleLogOut = (e: { preventDefault: () => void; }) => {
+    e.preventDefault()
+    router.push("api/auth/signout")
+  }
 
   return (
     <DropdownMenu>
@@ -50,7 +57,7 @@ export function UserNav() {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={handleLogOut}>
           Log out
           <DropdownMenuShortcut>S</DropdownMenuShortcut>
         </DropdownMenuItem>
