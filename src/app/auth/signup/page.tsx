@@ -1,52 +1,27 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Image from 'next/image';
-import { signIn, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { signUp } from '@/app/actions/users/signUp'
+import { signIn } from 'next-auth/react';
 
 const Page = () => {
-  const router = useRouter();
+  const [message, setMessage] = useState("");
   const username = useRef("");
   const password = useRef("");
-  const [message, setMessage] = useState("");
-
-  const { status } = useSession();
 
   const onSubmit = async () => {
-    console.log("Signing in...");
-    
-    setMessage('Signing in...');
-
-    try {
-      const signInResponse = await signIn("credentials", {
+    const message = await signUp(username.current, password.current);
+    setMessage(message);
+    if (message === "Successfully created new user!") {
+      const result = await signIn("credentials", {
         username: username.current,
         password: password.current,
         redirect: true,
         callbackUrl: "/dashboard"
-      })
-
-      if (!signInResponse || signInResponse.ok !== true) {
-        setMessage("Invalid credentials");
-      } else {
-        router.refresh();
-      }
-
-    } catch (err) {
-      console.log(err);
+      });
     }
-
-    setMessage(message);
   }
-
-  useEffect(() => {
-    console.log(status);
-    
-    if (status === 'authenticated') {
-      router.refresh();
-      router.push('/dashboard');
-    }
-  }, [status]);
 
   return (
     <div id="Connexion">
@@ -54,7 +29,7 @@ const Page = () => {
         <div className="login">
           <h1>Welcome back</h1>
           <h2>Please enter your details.</h2>
-          <h3>{message}</h3>
+          <h3 className='text-orange-700'>{message}</h3>
           <div className='form'>
             <label htmlFor="username">Username</label>
             <input type="username" name="username" id="Username" placeholder="Enter username" required maxLength={64} onChange={e => (username.current = e.target.value)} />
@@ -66,11 +41,11 @@ const Page = () => {
                 <label htmlFor="CheckBox">Remember for 30 days</label>
               </div><a href="#" className='select-none'>Forgot password</a>
             </div>
-            <button className="SubmitBtn" onClick={onSubmit}>Sign in</button>
+            <button className="SubmitBtn" onClick={onSubmit}>Sign up</button>
           </div>
           <div className="bottom">
-            <p>Don&rsquo;t have an account? </p>
-            <a href="/auth/signup" className='select-none' >Sign up</a>
+            <p>have an account? </p>
+            <a href="/auth/signin" className='select-none' >Sign in</a>
           </div>
         </div>
       </div>
