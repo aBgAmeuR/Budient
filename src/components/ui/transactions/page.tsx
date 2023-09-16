@@ -1,16 +1,26 @@
 import Header from '@/components/page-header';
 import MainNav from '@/components/main-nav';
+// import ThemeToggle from '@/components/ui/theme-toggle';
+
+// export default function Home() {
+//   return (
+//     <>
+//       <Header />
+//       <MainNav />
+//       <ThemeToggle />
+//     </>
+//   );
+// }
 
 import { promises as fs } from 'fs';
 import path from 'path';
+import Image from 'next/image';
 import { z } from 'zod';
 
 import { columns } from '@/components/ui/transactions/columns';
 import { DataTable } from '@/components/ui/transactions/data-table';
+import { UserNav } from '@/components/ui/transactions/user-nav';
 import { taskSchema } from '@/components/ui/data/schema';
-import { getServerSession } from 'next-auth';
-import { options } from '../api/auth/[...nextauth]/options';
-import { redirect } from 'next/navigation';
 
 // Simulate a database read for tasks.
 async function getTasks() {
@@ -22,10 +32,6 @@ async function getTasks() {
 }
 
 export default async function TaskPage() {
-  const session = await getServerSession(options);
-  if (!session) redirect('/auth/signin');
-
-
   const tasks = await getTasks();
 
   return (

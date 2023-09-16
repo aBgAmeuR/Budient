@@ -15,7 +15,9 @@ export const options: NextAuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        if (!credentials) {
+        if (!credentials?.username || !credentials.password) {
+          console.log('premier null');
+
           return null;
         }
 
@@ -29,18 +31,25 @@ export const options: NextAuthOptions = {
         });
 
         if (!user) {
+          console.log('deuxieme null');
+
           return null;
         }
-        
+
         const userPassword = user.password;
 
         const isValidPassword = bcrypt.compareSync(password, userPassword);
-        
-        if (!isValidPassword) {          
+
+        if (!isValidPassword) {
+          console.log('troisieme null');
           return null;
         }
+        console.log('log ok : ', user);
 
-        return user;
+        return {
+          id: user.id,
+          name: user.name,
+        };
       },
     },
   ],
@@ -51,14 +60,14 @@ export const options: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   jwt: {
-    async encode({ secret, token }) {
+    async encode({ secret, token }) {      
       if (!token) {
         throw new Error('No token to encode');
       }
 
       return jwt.sign(token, secret);
     },
-    async decode({ secret, token }) {
+    async decode({ secret, token }) {      
       if (!token) {
         throw new Error('No token to decode');
       }
@@ -66,7 +75,7 @@ export const options: NextAuthOptions = {
       if (typeof decodedToken === 'string') {
         return JSON.parse(decodedToken);
       } else {
-        return decodedToken;
+        return decodedToken as JWT;
       }
     },
   },
@@ -76,15 +85,17 @@ export const options: NextAuthOptions = {
     updateAge: 24 * 60 * 60, // 24 hours
   },
   callbacks: {
-    async session(params: { session: Session; token: JWT; user: User }) {    
+    async session(params: { session: Session; token: JWT; user: User }) {
       if (params.session.user) {
-        params.session.user.name = params.token.name;
+        params.session.user.id = params.token.id as string;
+        params.session.user.name = params.token.name as string;
       }
 
       return params.session;
     },
-    async jwt(params: { token: JWT; user?: User | undefined; account?: Account | null | undefined; profile?: Profile | undefined; isNewUser?: boolean | undefined }) {
+    async jwt(params: { token: JWT; user?: User | undefined; account?: Account | null | undefined; profile?: Profile | undefined; isNewUser?: boolean | undefined }) {      
       if (params.user) {
+        params.token.id = params.user.id;
         params.token.name = params.user.name;
       }
 
