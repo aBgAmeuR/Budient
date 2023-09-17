@@ -9,6 +9,7 @@ import { DataTableViewOptions } from "./data-table-view-options"
 
 import { categories } from "../data/data"
 import { DataTableFacetedFilter } from "./data-table-faceted-filter"
+import AddData from "./add-data"
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
@@ -55,7 +56,10 @@ export function DataTableToolbar<TData>({
           </Button>
         )}
       </div>
-      <DataTableViewOptions table={table} />
+      <div className="flex flex-row gap-2">
+        <DataTableViewOptions table={table} />
+        <AddData />
+      </div>
     </div>
   )
 }
