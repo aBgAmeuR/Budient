@@ -25,6 +25,7 @@ const AddData = () => {
         </pre>
       ),
     });
+    setOpen(false);
   }
 
   return (
