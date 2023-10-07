@@ -1,104 +1,45 @@
-'use client';
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { cn } from '@/lib/utils';
-import { Calendar } from '@/components/ui/calendar';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { CalendarIcon } from '@radix-ui/react-icons';
-import { format } from 'date-fns';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { AddTransactionForm } from '@/components/forms/add-transaction-form';
+import z from 'zod';
+import { toast } from '../use-toast';
+
+export const formSchema = z.object({
+  name: z.string({ required_error: 'Please enter a name' }),
+  date: z.date({ required_error: 'Please select a date' }),
+  amount: z.string({ required_error: 'Please enter a amount' }).regex(/^-?\d+(\.\d{1,2})?$/, { message: 'Please enter a valid amount' }),
+  category: z.string({ required_error: 'Please select a category' }),
+  description: z.string({ required_error: 'Please enter a description' }).max(160, { message: 'Please enter a description with less than 160 characters' }),
+});
 
 const AddData = () => {
-  const [name, setName] = React.useState<string>('');
-  const [date, setDate] = React.useState<Date>();
-  const [amount, setAmount] = React.useState<number>(0);
-  const [category, setCategory] = React.useState<string>('');
-  const [description, setDescription] = React.useState<string>('');
+  const [open, setOpen] = useState(false);
 
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-    console.log(name, date, amount, category, description);
-    
-  };
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    toast({
+      title: 'You submitted the following values:',
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
+        </pre>
+      ),
+    });
+  }
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="default" size="sm" className="ml-auto hidden h-8 lg:flex">
           Add Transaction
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] bg-[#ffffff] dark:bg-[#111315]">
-        <form onSubmit={handleSubmit}>
-          <DialogHeader>
-            <DialogTitle>Add Transaction</DialogTitle>
-            <DialogDescription>Add a transaction to your list here. Click add when you&rsquo;re done.</DialogDescription>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
-                Name
-              </Label>
-              <Input id="name" value={name} onChange={(e) => setName(e.target.value)} className="col-span-3" required />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="username" className="text-right">
-                Date
-              </Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button variant={'outline'} className={cn('col-span-3 justify-start text-left font-normal', !date && 'text-muted-foreground')}>
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {date ? format(date, 'PPP') : <span>Pick a date</span>}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar mode="single" selected={date} onSelect={setDate} initialFocus required />
-                </PopoverContent>
-              </Popover>
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="amount" className="text-right">
-                Amount
-              </Label>
-              <Input id="amount" type="number" value={amount} onChange={(e) => setAmount(parseFloat(e.target.value))} className="col-span-3" step="0.01" required />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="amount" className="text-right">
-                Category
-              </Label>
-              <Select value={category} onValueChange={(value) => setCategory(value)} required>
-                <SelectTrigger className="col-span-3">
-                  <SelectValue placeholder="Category" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Food">Food</SelectItem>
-                  <SelectItem value="Entertainement">Entertainement</SelectItem>
-                  <SelectItem value="Transportation">Transportation</SelectItem>
-                  <SelectItem value="Shopping">Shopping</SelectItem>
-                  <SelectItem value="Bills">Bills</SelectItem>
-                  <SelectItem value="Other">Other</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="amount" className="text-right">
-                Description
-              </Label>
-              <Textarea placeholder="Add a description" className="col-span-3 resize-none" value={description} onChange={(e) => setDescription(e.target.value)} />
-            </div>
-          </div>
-          <DialogFooter>
-            <Button type="submit">
-              Add
-            </Button>
-          </DialogFooter>
-        </form>
+        <DialogHeader>
+          <DialogTitle>Add Transaction</DialogTitle>
+          <DialogDescription>Add a transaction to your list here. Click add when you&rsquo;re done.</DialogDescription>
+        </DialogHeader>
+        <AddTransactionForm onSubmit={onSubmit} />
       </DialogContent>
     </Dialog>
   );
