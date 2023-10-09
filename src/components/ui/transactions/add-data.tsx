@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -10,22 +12,39 @@ export const formSchema = z.object({
   date: z.date({ required_error: 'Please select a date' }),
   amount: z.string({ required_error: 'Please enter a amount' }).regex(/^-?\d+(\.\d{1,2})?$/, { message: 'Please enter a valid amount' }),
   category: z.string({ required_error: 'Please select a category' }),
-  description: z.string({ required_error: 'Please enter a description' }).max(160, { message: 'Please enter a description with less than 160 characters' }),
+  description: z.string().max(160, { message: 'Please enter a description with less than 160 characters' }).optional(),
 });
 
 const AddData = () => {
   const [open, setOpen] = useState(false);
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      ),
-    });
-    setOpen(false);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const response = await fetch(`/api/transactions`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: values.name,
+        date: values.date,
+        amount: values.amount,
+        category: values.category,
+        description: values.description,
+      }),
+    })
+
+    if (!response?.ok) {
+      toast({
+        title: 'Error',
+        description: (
+          <div>
+            <p>Something went wrong. Please try again.</p>
+          </div>
+        ),
+      });
+    } else {
+      setOpen(false);
+    }
   }
 
   return (
