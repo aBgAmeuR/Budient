@@ -13,39 +13,6 @@ const transationCreateSchema = z.object({
   description: z.string().max(160).optional(),
 });
 
-// export async function GET(req: Request) {
-//   try {
-//     const userId = req.query.id;
-
-//     if (!userId) {
-//       return new Response('User ID is required', { status: 400 }); // Bad Request
-//     }
-
-//     const transactions = await prisma.transaction.findMany({
-//       where: {
-//         author: {
-//           id: userId
-//         },
-//       },
-//       orderBy: {
-//         date: 'desc',
-//       },
-//       select: {
-//         id: true,
-//         name: true,
-//         date: true,
-//         amount: true,
-//         category: true,
-//         description: true,
-//       },
-//     });
-
-//     return new Response(JSON.stringify(transactions));
-//   } catch (error) {
-//     return new Response(null, { status: 500 });
-//   }
-// }
-
 export async function POST(req: Request) {
   try {
     const session = await getServerSession(options);

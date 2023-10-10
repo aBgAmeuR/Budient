@@ -1,5 +1,5 @@
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
-import { Utensils, Clapperboard, Bus, ShoppingCart, CircleDollarSign } from 'lucide-react';
+import { Utensils, Clapperboard, Car, ShoppingCart, CircleDollarSign } from 'lucide-react';
 
 export const categories = [
   {
@@ -15,7 +15,7 @@ export const categories = [
   {
     value: 'Transportation',
     label: 'Transportation',
-    icon: Bus,
+    icon: Car,
   },
   {
     value: 'Shopping',

@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { AddTransactionForm } from '@/components/forms/add-transaction-form';
 import z from 'zod';
 import { toast } from '../use-toast';
+import { useRouter } from 'next/navigation';
 
 export const formSchema = z.object({
   name: z.string({ required_error: 'Please enter a name' }),
@@ -17,6 +18,7 @@ export const formSchema = z.object({
 
 const AddData = () => {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const response = await fetch(`/api/transactions`, {
@@ -44,13 +46,14 @@ const AddData = () => {
       });
     } else {
       setOpen(false);
+      router.refresh();
     }
   }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="default" size="sm" className="ml-auto hidden h-8 lg:flex">
+        <Button variant="default" size="sm" className="ml-auto hidden h-8 lg:flex just">
           Add Transaction
         </Button>
       </DialogTrigger>
