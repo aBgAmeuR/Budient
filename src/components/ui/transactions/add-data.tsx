@@ -21,6 +21,8 @@ const AddData = () => {
   const router = useRouter();
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
+    
     const response = await fetch(`/api/transactions`, {
       method: "POST",
       headers: {

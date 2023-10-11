@@ -51,7 +51,7 @@ export const columns: ColumnDef<Task>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Amount" />
     ),
-    cell: ({ row }) => <div className="w-[100px]">{row.getValue("amount")}</div>,
+    cell: ({ row }) => <div className="w-[100px]">{row.getValue("amount")}€</div>,
     enableHiding: false,
   },
   {

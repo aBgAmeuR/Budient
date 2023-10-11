@@ -5,16 +5,14 @@ import prisma from '@/app/lib/prisma';
 
 const transationCreateSchema = z.object({
   name: z.string(),
-  date: z.string().refine((value) => !isNaN(Date.parse(value)), {
-    message: 'Invalid date format',
-  }),
+  date: z.string().transform((str) => new Date(str)),
   amount: z.string().regex(/^-?\d+(\.\d{1,2})?$/),
   category: z.string(),
   description: z.string().max(160).optional(),
 });
 
 export async function POST(req: Request) {
-  try {
+  try {    
     const session = await getServerSession(options);
 
     if (!session) {
@@ -29,7 +27,7 @@ export async function POST(req: Request) {
     const transaction = await prisma.transaction.create({
       data: {
         name: body.name,
-        date: new Date(),
+        date: new Date(body.date),
         amount: parseFloat(body.amount),
         category: body.category,
         description: body.description || '',
