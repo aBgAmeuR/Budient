@@ -24,7 +24,6 @@ const AddData = () => {
     console.log(values);
     
     const response = await fetch(`/api/transactions`, {
-      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },

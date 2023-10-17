@@ -27,7 +27,6 @@ export const OverviewDashboard = ({ dataChart }: { dataChart: DataChart[] }) => 
           tickFormatter={(value) => `$${value}`}
         />
         <Bar dataKey="total" fill="#2ec4b6" radius={[4, 4, 0, 0]} />
-        {/* // le hover du Tooltip doit etre derriere le Bar change le z index mais ne pas mettre transparent  */}
         <Tooltip
           cursor={{ fill: 'transparent' }}
         />
